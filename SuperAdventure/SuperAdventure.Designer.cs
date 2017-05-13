@@ -50,6 +50,7 @@
             this.dgvInventory = new System.Windows.Forms.DataGridView();
             this.dgvQuests = new System.Windows.Forms.DataGridView();
             this.btnTrade = new System.Windows.Forms.Button();
+            this.btnWorld = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvInventory)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvQuests)).BeginInit();
             this.SuspendLayout();
@@ -263,11 +264,22 @@
             this.btnTrade.UseVisualStyleBackColor = true;
             this.btnTrade.Click += new System.EventHandler(this.btnTrade_Click);
             // 
+            // btnWorld
+            // 
+            this.btnWorld.Location = new System.Drawing.Point(620, 620);
+            this.btnWorld.Name = "btnWorld";
+            this.btnWorld.Size = new System.Drawing.Size(75, 23);
+            this.btnWorld.TabIndex = 22;
+            this.btnWorld.Text = "World";
+            this.btnWorld.UseVisualStyleBackColor = true;
+            this.btnWorld.Click += new System.EventHandler(this.btnWorld_Click);
+            // 
             // SuperAdventure
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(719, 651);
+            this.Controls.Add(this.btnWorld);
             this.Controls.Add(this.btnTrade);
             this.Controls.Add(this.dgvQuests);
             this.Controls.Add(this.dgvInventory);
@@ -293,6 +305,7 @@
             this.Name = "SuperAdventure";
             this.Text = "My Game";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.SuperAdventure_FormClosing);
+            this.Load += new System.EventHandler(this.SuperAdventure_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvInventory)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvQuests)).EndInit();
             this.ResumeLayout(false);
@@ -324,6 +337,7 @@
         private System.Windows.Forms.DataGridView dgvInventory;
         private System.Windows.Forms.DataGridView dgvQuests;
         private System.Windows.Forms.Button btnTrade;
+        private System.Windows.Forms.Button btnWorld;
     }
 }
 

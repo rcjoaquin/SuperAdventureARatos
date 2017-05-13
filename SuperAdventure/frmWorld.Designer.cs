@@ -28,11 +28,34 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            this.dgvWorld = new System.Windows.Forms.DataGridView();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvWorld)).BeginInit();
+            this.SuspendLayout();
+            // 
+            // dgvWorld
+            // 
+            this.dgvWorld.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvWorld.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvWorld.Location = new System.Drawing.Point(0, 0);
+            this.dgvWorld.Name = "dgvWorld";
+            this.dgvWorld.Size = new System.Drawing.Size(668, 401);
+            this.dgvWorld.TabIndex = 0;
+            // 
+            // frmWorld
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Text = "frmWorld";
+            this.ClientSize = new System.Drawing.Size(668, 401);
+            this.Controls.Add(this.dgvWorld);
+            this.Name = "frmWorld";
+            this.Text = "World";
+            ((System.ComponentModel.ISupportInitialize)(this.dgvWorld)).EndInit();
+            this.ResumeLayout(false);
+
         }
 
         #endregion
+
+        private System.Windows.Forms.DataGridView dgvWorld;
     }
 }

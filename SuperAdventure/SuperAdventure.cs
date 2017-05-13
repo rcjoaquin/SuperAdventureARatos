@@ -16,9 +16,6 @@ namespace SuperAdventure
 
         public SuperAdventure()
         {
-
-            World.CreateWorldFromXmlString(File.ReadAllText(Path.Combine(Environment.CurrentDirectory, "Worlds", "WorldData.xml")));
-
             InitializeComponent();
 
             _player = PlayerDataMapper.CreateFromDatabase();
@@ -220,6 +217,17 @@ namespace SuperAdventure
             TradingScreen tradingScreen = new TradingScreen(_player);
             tradingScreen.StartPosition = FormStartPosition.CenterParent;
             tradingScreen.ShowDialog(this);
+        }
+
+        private void SuperAdventure_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnWorld_Click(object sender, EventArgs e)
+        {
+            frmWorld fWorld = new frmWorld();
+            fWorld.ShowDialog();
         }
     }
 }

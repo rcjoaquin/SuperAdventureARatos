@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.IO;
 using System.Linq;
 using System.Xml;
@@ -9,7 +10,7 @@ namespace Engine
     
     public static class World
     {
-        
+        public static List<LocationExtended> place;
 
         private static readonly List<Item> _items = new List<Item>();
         private static readonly List<Monster> _monsters = new List<Monster>();
@@ -56,7 +57,7 @@ namespace Engine
         //}
 
 
-        public static void CreateWorldFromXmlString(string xmlWorld)
+        public static bool CreateWorldFromXmlString(string xmlWorld)
         {
             string pasos= string.Empty;
             try
@@ -244,26 +245,29 @@ namespace Engine
 
                     if (node.SelectSingleNode("South") != null)
                     {
-                        location.LocationToNorth = LocationByID(Convert.ToInt32(node.SelectSingleNode("South").InnerText));
+                        location.LocationToSouth = LocationByID(Convert.ToInt32(node.SelectSingleNode("South").InnerText));
                     }
 
                     if (node.SelectSingleNode("East") != null)
                     {
-                        location.LocationToNorth = LocationByID(Convert.ToInt32(node.SelectSingleNode("East").InnerText));
+                        location.LocationToEast = LocationByID(Convert.ToInt32(node.SelectSingleNode("East").InnerText));
                     }
 
                     if (node.SelectSingleNode("West") != null)
                     {
-                        location.LocationToNorth = LocationByID(Convert.ToInt32(node.SelectSingleNode("West").InnerText));
+                        location.LocationToWest = LocationByID(Convert.ToInt32(node.SelectSingleNode("West").InnerText));
                     }
                 }
 
                 #endregion
 
+                return true;
+
             }
             catch(Exception ex)
             {
-                throw new Exception("Error mientras se estaba " + pasos, ex);
+                //throw new Exception("Error mientras se estaba " + pasos, ex);
+                return false;
             }
         }
         
@@ -290,6 +294,134 @@ namespace Engine
         public static Vendor VendorByID(int id)
         {
             return _vendors.SingleOrDefault(x => x.ID == id);
+        }
+
+        public static void GenerateListLocations()
+        {
+            LocationExtended loc = place[place.Count - 1];
+
+            if (loc.location.LocationToNorth != null && !place.Exists(l => l.location.ID == loc.location.LocationToNorth.ID))
+            {
+                Location newLocation = loc.location.LocationToNorth;
+
+                place.Add(new LocationExtended()
+                {
+                    location = newLocation,
+                    x = loc.x,
+                    y = loc.y - 1
+                });
+                GenerateListLocations();
+            }
+
+            if (loc.location.LocationToSouth != null && !place.Exists(l => l.location.ID == loc.location.LocationToSouth.ID))
+            {
+                Location newLocation = loc.location.LocationToSouth;
+
+                place.Add(new LocationExtended()
+                {
+                    location = newLocation,
+                    x = loc.x,
+                    y = loc.y + 1
+                });
+                GenerateListLocations();
+            }
+
+            if (loc.location.LocationToEast != null && !place.Exists(l => l.location.ID == loc.location.LocationToEast.ID))
+            {
+                Location newLocation = loc.location.LocationToEast;
+
+                place.Add(new LocationExtended()
+                {
+                    location = newLocation,
+                    x = loc.x + 1,
+                    y = loc.y
+                });
+                GenerateListLocations();
+            }
+
+            if (loc.location.LocationToWest != null && !place.Exists(l => l.location.ID == loc.location.LocationToWest.ID))
+            {
+                Location newLocation = loc.location.LocationToWest;
+
+                place.Add(new LocationExtended()
+                {
+                    location = newLocation,
+                    x = loc.x - 1,
+                    y = loc.y
+                });
+                GenerateListLocations();
+            }
+        }
+
+        public static DataTable GetDataTablePlace()
+        {
+
+            Location home = LocationByID(LOCATION_ID_HOME);
+
+            place = new List<LocationExtended>();
+
+            place.Add(new LocationExtended()
+            {
+                location = home,
+                x = 1000,
+                y = 1000
+            });
+
+            GenerateListLocations();
+
+            int minX = 1000;
+            int maxX = 1000;
+            int minY = 1000;
+            int maxY = 1000;
+
+            place.ForEach(l => {
+
+                if (l.x < minX)
+                    minX = l.x;
+
+                if (l.x > maxX)
+                    maxX = l.x;
+
+                if (l.y < minY)
+                    minY = l.y;
+
+                if (l.y > maxY)
+                    maxY = l.y;
+            });
+
+            DataTable dataTablePlace = new DataTable();
+
+            for (int col = minX; col <= maxX; col++)
+            {
+                dataTablePlace.Columns.Add("loc" + (col - minX).ToString(), typeof(string));
+            }
+
+            for (int row = minY; row <= maxY; row++)
+            {
+
+                DataRow dataRow = dataTablePlace.NewRow();
+
+                for (int col = minX; col <= maxX; col++)
+                {
+                    if (World.place.Find(l => l.x == col && l.y == row) != null)
+                    {
+
+                        Location loc = World.place.Find(l => l.x == col && l.y == row).location;
+
+                        dataRow["loc" + (col - minX).ToString()] = Environment.NewLine + loc.Name + Environment.NewLine;
+                    }
+                    else
+                    {
+
+                        dataRow["loc" + (col - minX).ToString()] = string.Empty;
+                    }
+
+                }
+
+                dataTablePlace.Rows.Add(dataRow);
+            }
+
+            return dataTablePlace;
         }
     }
 }

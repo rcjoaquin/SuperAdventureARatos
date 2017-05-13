@@ -13,7 +13,11 @@ namespace SuperAdventure
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new SuperAdventure());
+            Application.Run(new frmLoadingPlayer());
+
+            //Application.Run(new SuperAdventure());
+
+            Application.Run(new frmWorld());
         }
     }
 }
