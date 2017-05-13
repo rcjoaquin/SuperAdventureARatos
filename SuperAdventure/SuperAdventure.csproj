@@ -44,6 +44,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="frmLoadingPlayer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmLoadingPlayer.Designer.cs">
+      <DependentUpon>frmLoadingPlayer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmWorld.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmWorld.Designer.cs">
+      <DependentUpon>frmWorld.cs</DependentUpon>
+    </Compile>
     <Compile Include="SuperAdventure.cs">
       <SubType>Form</SubType>
     </Compile>
