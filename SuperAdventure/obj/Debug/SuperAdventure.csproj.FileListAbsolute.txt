@@ -1,0 +1,14 @@
+C:\GitHub\SuperAdventureARatos\SuperAdventure\bin\Debug\SuperAdventure.exe.config
+C:\GitHub\SuperAdventureARatos\SuperAdventure\obj\Debug\SuperAdventure.csprojResolveAssemblyReference.cache
+C:\GitHub\SuperAdventureARatos\SuperAdventure\obj\Debug\SuperAdventure.Properties.Resources.resources
+C:\GitHub\SuperAdventureARatos\SuperAdventure\obj\Debug\SuperAdventure.SuperAdventure.resources
+C:\GitHub\SuperAdventureARatos\SuperAdventure\obj\Debug\SuperAdventure.TradingScreen.resources
+C:\GitHub\SuperAdventureARatos\SuperAdventure\obj\Debug\SuperAdventure.csproj.GenerateResource.Cache
+C:\GitHub\SuperAdventureARatos\SuperAdventure\bin\Debug\WorldData.xml
+C:\GitHub\SuperAdventureARatos\SuperAdventure\bin\Debug\Worlds\WorldData.xml
+C:\GitHub\SuperAdventureARatos\SuperAdventure\bin\Debug\SuperAdventure.exe
+C:\GitHub\SuperAdventureARatos\SuperAdventure\bin\Debug\SuperAdventure.pdb
+C:\GitHub\SuperAdventureARatos\SuperAdventure\bin\Debug\Engine.dll
+C:\GitHub\SuperAdventureARatos\SuperAdventure\bin\Debug\Engine.pdb
+C:\GitHub\SuperAdventureARatos\SuperAdventure\obj\Debug\SuperAdventure.exe
+C:\GitHub\SuperAdventureARatos\SuperAdventure\obj\Debug\SuperAdventure.pdb

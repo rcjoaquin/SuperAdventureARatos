@@ -1,0 +1,6 @@
+C:\GitHub\SuperAdventureARatos\Engine\bin\Debug\WorldData.xml
+C:\GitHub\SuperAdventureARatos\Engine\bin\Debug\Engine.dll
+C:\GitHub\SuperAdventureARatos\Engine\bin\Debug\Engine.pdb
+C:\GitHub\SuperAdventureARatos\Engine\obj\Debug\Engine.csprojResolveAssemblyReference.cache
+C:\GitHub\SuperAdventureARatos\Engine\obj\Debug\Engine.dll
+C:\GitHub\SuperAdventureARatos\Engine\obj\Debug\Engine.pdb

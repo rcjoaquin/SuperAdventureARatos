@@ -16,6 +16,9 @@ namespace SuperAdventure
 
         public SuperAdventure()
         {
+
+            World.CreateWorldFromXmlString(File.ReadAllText(Path.Combine(Environment.CurrentDirectory, "Worlds", "WorldData.xml")));
+
             InitializeComponent();
 
             _player = PlayerDataMapper.CreateFromDatabase();

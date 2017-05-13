@@ -17,7 +17,7 @@ namespace Engine
         private static readonly List<Location> _locations = new List<Location>();
         private static readonly List<Vendor> _vendors = new List<Vendor>();
 
-        //public const int UNSELLABLE_ITEM_PRICE = -1;
+        public const int UNSELLABLE_ITEM_PRICE = -1;
 
         public const int ITEM_ID_RUSTY_SWORD = 1;
         //public const int ITEM_ID_RAT_TAIL = 2;
@@ -49,14 +49,14 @@ namespace Engine
 
         //public const int VENDOR_ID_BOB_THE_RAT_CATCHER = 1;
 
-        static World()
-        {
-            string xmlWorld = string.Empty;
-            CreateWorldFromXmlString(xmlWorld);
-        }
+        //static World()
+        //{
+        //    string xmlWorld = string.Empty;
+        //    CreateWorldFromXmlString(xmlWorld);
+        //}
 
 
-        private static void CreateWorldFromXmlString(string xmlWorld)
+        public static void CreateWorldFromXmlString(string xmlWorld)
         {
             string pasos= string.Empty;
             try
