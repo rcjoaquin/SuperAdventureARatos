@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace Engine
+namespace Engine.Items
 {
     public class InventoryItem : INotifyPropertyChanged
     {

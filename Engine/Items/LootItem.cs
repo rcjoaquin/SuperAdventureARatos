@@ -1,4 +1,4 @@
-﻿namespace Engine
+﻿namespace Engine.Items
 {
     public class LootItem
     {

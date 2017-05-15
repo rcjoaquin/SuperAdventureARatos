@@ -1,4 +1,4 @@
-﻿namespace Engine
+﻿namespace Engine.Items
 {
     public class Weapon : Item
     {
@@ -10,6 +10,7 @@
         {
             MinimumDamage = minimumDamage;
             MaximumDamage = maximumDamage;
+            this._type = Item.ItemType.Weapon;
         }
     }
 }

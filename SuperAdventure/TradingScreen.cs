@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using Engine;
+using Engine.Items;
 
 namespace SuperAdventure
 {

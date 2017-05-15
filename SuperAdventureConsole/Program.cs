@@ -3,6 +3,8 @@ using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using Engine;
+using Engine.Items;
+using Engine.Messages;
 
 namespace SuperAdventureConsole
 {

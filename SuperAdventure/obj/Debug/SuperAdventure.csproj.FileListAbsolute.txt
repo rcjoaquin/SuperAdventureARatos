@@ -14,3 +14,4 @@ C:\GitHub\SuperAdventureARatos\SuperAdventure\obj\Debug\SuperAdventure.exe
 C:\GitHub\SuperAdventureARatos\SuperAdventure\obj\Debug\SuperAdventure.pdb
 C:\GitHub\SuperAdventureARatos\SuperAdventure\obj\Debug\SuperAdventure.frmLoadingPlayer.resources
 C:\GitHub\SuperAdventureARatos\SuperAdventure\obj\Debug\SuperAdventure.frmWorld.resources
+C:\GitHub\SuperAdventureARatos\SuperAdventure\obj\Debug\SuperAdventure.frmItem.resources

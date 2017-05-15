@@ -5,6 +5,8 @@ using System.Windows.Forms;
 using System.IO;
 
 using Engine;
+using Engine.Items;
+using Engine.Messages;
 
 namespace SuperAdventure
 {

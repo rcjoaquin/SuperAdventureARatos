@@ -1,4 +1,6 @@
-﻿namespace Engine
+﻿using Engine.Items;
+
+namespace Engine
 {
     public class QuestCompletionItem
     {

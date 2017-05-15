@@ -183,20 +183,6 @@
     </Vendor>
   </Vendors>
   <Locations>
-    <!--<Location>
-      <Id></Id>
-      <Name></Name>
-      <Description></Description>
-      <ItemRequiredToEnter></ItemRequiredToEnter> //Puede ser nula
-      <QuestAvailableHere></QuestAvailableHere> // Puede ser nula
-      <VendorWorkingHere></VendorWorkingHere> // Puede ser nula
-      <Monsters>
-        <Monster>
-          <IdMonster></IdMonster>
-          <PercentageOfAppearance></PercentageOfAppearance>
-        </Monster>
-      </Monsters>
-    </Location>-->
     <Location>
       <Id>1</Id>
       <Name>Home</Name>

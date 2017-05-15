@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Engine.Characters;
+using Engine.Items;
 
 namespace Engine
 {
@@ -20,6 +22,8 @@ namespace Engine
         public int ID { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
+        public int x { get; set; }
+        public int y { get; set; }
         public Item ItemRequiredToEnter { get; set; }
         public Quest QuestAvailableHere { get; set; }
         public Vendor VendorWorkingHere { get; set; }

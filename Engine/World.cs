@@ -4,13 +4,15 @@ using System.Data;
 using System.IO;
 using System.Linq;
 using System.Xml;
+using Engine.Characters;
+using Engine.Items;
 
 namespace Engine
 {
     
     public static class World
     {
-        public static List<LocationExtended> place;
+        public static List<Location> place2;
 
         private static readonly List<Item> _items = new List<Item>();
         private static readonly List<Monster> _monsters = new List<Monster>();
@@ -19,47 +21,67 @@ namespace Engine
         private static readonly List<Vendor> _vendors = new List<Vendor>();
 
         public const int UNSELLABLE_ITEM_PRICE = -1;
-
         public const int ITEM_ID_RUSTY_SWORD = 1;
-        //public const int ITEM_ID_RAT_TAIL = 2;
-        //public const int ITEM_ID_PIECE_OF_FUR = 3;
-        //public const int ITEM_ID_SNAKE_FANG = 4;
-        //public const int ITEM_ID_SNAKESKIN = 5;
-        //public const int ITEM_ID_CLUB = 6;
-        //public const int ITEM_ID_HEALING_POTION = 7;
-        //public const int ITEM_ID_SPIDER_FANG = 8;
-        //public const int ITEM_ID_SPIDER_SILK = 9;
-        //public const int ITEM_ID_ADVENTURER_PASS = 10;
-
-        //public const int MONSTER_ID_RAT = 1;
-        //public const int MONSTER_ID_SNAKE = 2;
-        //public const int MONSTER_ID_GIANT_SPIDER = 3;
-
-        //public const int QUEST_ID_CLEAR_ALCHEMIST_GARDEN = 1;
-        //public const int QUEST_ID_CLEAR_FARMERS_FIELD = 2;
-
         public const int LOCATION_ID_HOME = 1;
-        //public const int LOCATION_ID_TOWN_SQUARE = 2;
-        //public const int LOCATION_ID_GUARD_POST = 3;
-        //public const int LOCATION_ID_ALCHEMIST_HUT = 4;
-        //public const int LOCATION_ID_ALCHEMISTS_GARDEN = 5;
-        //public const int LOCATION_ID_FARMHOUSE = 6;
-        //public const int LOCATION_ID_FARM_FIELD = 7;
-        //public const int LOCATION_ID_BRIDGE = 8;
-        //public const int LOCATION_ID_SPIDER_FIELD = 9;
 
-        //public const int VENDOR_ID_BOB_THE_RAT_CATCHER = 1;
+        private static int minX;
+        private static int maxX;
+        private static int minY;
+        private static int maxY;
 
-        //static World()
-        //{
-        //    string xmlWorld = string.Empty;
-        //    CreateWorldFromXmlString(xmlWorld);
-        //}
-
-
-        public static bool CreateWorldFromXmlString(string xmlWorld)
+        public static Item ItemByID(int id)
         {
-            string pasos= string.Empty;
+            return _items.SingleOrDefault(x => x.ID == id);
+        }
+
+        public static List<Item> ListItems()
+        {
+            return _items;
+        }
+
+        public static Monster MonsterByID(int id)
+        {
+            return _monsters.SingleOrDefault(x => x.ID == id);
+        }
+
+        public static List<Monster> ListMonsters()
+        {
+            return _monsters;
+        }
+
+        public static Quest QuestByID(int id)
+        {
+            return _quests.SingleOrDefault(x => x.ID == id);
+        }
+
+        public static List<Quest> ListQuests()
+        {
+            return _quests;
+        }
+
+        public static Location LocationByID(int id)
+        {
+            return _locations.SingleOrDefault(x => x.ID == id);
+        }
+
+        public static List<Location> ListLocations()
+        {
+            return _locations;
+        }
+
+        public static Vendor VendorByID(int id)
+        {
+            return _vendors.SingleOrDefault(x => x.ID == id);
+        }
+
+        public static List<Vendor> ListVendors()
+        {
+            return _vendors;
+        }
+
+        public static bool LoadWorld(string xmlWorld)
+        {
+            string pasos = string.Empty;
             try
             {
                 pasos = "Inicializando";
@@ -105,8 +127,8 @@ namespace Engine
                     string NamePlural = node.SelectSingleNode("NamePlural").InnerText;
                     int Price = Convert.ToInt32(node.SelectSingleNode("Price").InnerText);
                     int AmountToHeal = Convert.ToInt32(node.SelectSingleNode("AmountToHeal").InnerText);
-                   
-                    _items.Add(new HealingPotion(Id, Name, NamePlural, AmountToHeal,Price));
+
+                    _items.Add(new HealingPotion(Id, Name, NamePlural, AmountToHeal, Price));
                 }
                 #endregion
 
@@ -122,7 +144,7 @@ namespace Engine
                     int CurrentHitPoints = Convert.ToInt32(node.SelectSingleNode("CurrentHitPoints").InnerText);
                     int MaximumHitPoints = Convert.ToInt32(node.SelectSingleNode("MaximumHitPoints").InnerText);
 
-                    Monster monster = new Monster(Id, Name, MaximumDamage,RewardExperiencePoints,RewardGold,CurrentHitPoints,MaximumHitPoints);
+                    Monster monster = new Monster(Id, Name, MaximumDamage, RewardExperiencePoints, RewardGold, CurrentHitPoints, MaximumHitPoints);
 
                     foreach (XmlNode nodechild in node.SelectNodes("LootTable/LootItem"))
                     {
@@ -148,7 +170,7 @@ namespace Engine
                     int RewardExperiencePoints = Convert.ToInt32(node.SelectSingleNode("RewardExperiencePoints").InnerText);
                     int RewardGold = Convert.ToInt32(node.SelectSingleNode("RewardGold").InnerText);
 
-                    Quest quest = new Quest(Id, Name,Description, RewardExperiencePoints, RewardGold);
+                    Quest quest = new Quest(Id, Name, Description, RewardExperiencePoints, RewardGold);
 
                     foreach (XmlNode nodechild in node.SelectNodes("QuestCompletionItems/QuestCompletionItem"))
                     {
@@ -158,7 +180,7 @@ namespace Engine
                         quest.QuestCompletionItems.Add(new QuestCompletionItem(ItemByID(IdItem), Quantity));
                     }
 
-                    
+
 
                     int RewardItemId = Convert.ToInt32(node.SelectSingleNode("RewardItem/IdItem").InnerText);
 
@@ -264,117 +286,66 @@ namespace Engine
                 return true;
 
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 //throw new Exception("Error mientras se estaba " + pasos, ex);
                 return false;
             }
         }
         
-        public static Item ItemByID(int id)
+        public static void CalculateXYLocations()
         {
-            return _items.SingleOrDefault(x => x.ID == id);
-        }
+            Location loc = place2[place2.Count - 1];
 
-        public static Monster MonsterByID(int id)
-        {
-            return _monsters.SingleOrDefault(x => x.ID == id);
-        }
-
-        public static Quest QuestByID(int id)
-        {
-            return _quests.SingleOrDefault(x => x.ID == id);
-        }
-
-        public static Location LocationByID(int id)
-        {
-            return _locations.SingleOrDefault(x => x.ID == id);
-        }
-
-        public static Vendor VendorByID(int id)
-        {
-            return _vendors.SingleOrDefault(x => x.ID == id);
-        }
-
-        public static void GenerateListLocations()
-        {
-            LocationExtended loc = place[place.Count - 1];
-
-            if (loc.location.LocationToNorth != null && !place.Exists(l => l.location.ID == loc.location.LocationToNorth.ID))
+            if (loc.LocationToNorth != null && !place2.Exists(l => l.ID == loc.LocationToNorth.ID))
             {
-                Location newLocation = loc.location.LocationToNorth;
-
-                place.Add(new LocationExtended()
-                {
-                    location = newLocation,
-                    x = loc.x,
-                    y = loc.y - 1
-                });
-                GenerateListLocations();
+                Location newLocation = loc.LocationToNorth;
+                newLocation.x = loc.x;
+                newLocation.y = loc.y - 1;
+                
+                place2.Add(newLocation);
+                CalculateXYLocations();
             }
 
-            if (loc.location.LocationToSouth != null && !place.Exists(l => l.location.ID == loc.location.LocationToSouth.ID))
+            if (loc.LocationToSouth != null && !place2.Exists(l => l.ID == loc.LocationToSouth.ID))
             {
-                Location newLocation = loc.location.LocationToSouth;
-
-                place.Add(new LocationExtended()
-                {
-                    location = newLocation,
-                    x = loc.x,
-                    y = loc.y + 1
-                });
-                GenerateListLocations();
+                Location newLocation = loc.LocationToSouth;
+                newLocation.x = loc.x;
+                newLocation.y = loc.y + 1;
+                
+                place2.Add(newLocation);
+                CalculateXYLocations();
             }
 
-            if (loc.location.LocationToEast != null && !place.Exists(l => l.location.ID == loc.location.LocationToEast.ID))
+            if (loc.LocationToEast != null && !place2.Exists(l => l.ID == loc.LocationToEast.ID))
             {
-                Location newLocation = loc.location.LocationToEast;
-
-                place.Add(new LocationExtended()
-                {
-                    location = newLocation,
-                    x = loc.x + 1,
-                    y = loc.y
-                });
-                GenerateListLocations();
+                Location newLocation = loc.LocationToEast;
+                newLocation.x = loc.x +1;
+                newLocation.y = loc.y;
+                
+                place2.Add(newLocation);
+                CalculateXYLocations();
             }
 
-            if (loc.location.LocationToWest != null && !place.Exists(l => l.location.ID == loc.location.LocationToWest.ID))
+            if (loc.LocationToWest != null && !place2.Exists(l => l.ID == loc.LocationToWest.ID))
             {
-                Location newLocation = loc.location.LocationToWest;
-
-                place.Add(new LocationExtended()
-                {
-                    location = newLocation,
-                    x = loc.x - 1,
-                    y = loc.y
-                });
-                GenerateListLocations();
+                Location newLocation = loc.LocationToWest;
+                newLocation.x = loc.x -1;
+                newLocation.y = loc.y;
+                
+                place2.Add(newLocation);
+                CalculateXYLocations();
             }
         }
 
-        public static DataTable GetDataTablePlace()
+        public static void CalculateMinMaxXY()
         {
+            minX = _locations.Count;
+            maxX = _locations.Count;
+            minY = _locations.Count;
+            maxY = _locations.Count;
 
-            Location home = LocationByID(LOCATION_ID_HOME);
-
-            place = new List<LocationExtended>();
-
-            place.Add(new LocationExtended()
-            {
-                location = home,
-                x = 1000,
-                y = 1000
-            });
-
-            GenerateListLocations();
-
-            int minX = 1000;
-            int maxX = 1000;
-            int minY = 1000;
-            int maxY = 1000;
-
-            place.ForEach(l => {
+            place2.ForEach(l => {
 
                 if (l.x < minX)
                     minX = l.x;
@@ -388,6 +359,22 @@ namespace Engine
                 if (l.y > maxY)
                     maxY = l.y;
             });
+        }
+
+        public static DataTable GetDataTablePlace()
+        {
+            Location home = LocationByID(LOCATION_ID_HOME);
+
+            place2 = new List<Location>();
+
+            home.x = _locations.Count;
+            home.y = _locations.Count;
+
+            place2.Add(home);
+
+            CalculateXYLocations();
+
+            CalculateMinMaxXY();
 
             DataTable dataTablePlace = new DataTable();
 
@@ -403,10 +390,10 @@ namespace Engine
 
                 for (int col = minX; col <= maxX; col++)
                 {
-                    if (World.place.Find(l => l.x == col && l.y == row) != null)
+                    if (World.place2.Find(l => l.x == col && l.y == row) != null)
                     {
 
-                        Location loc = World.place.Find(l => l.x == col && l.y == row).location;
+                        Location loc = World.place2.Find(l => l.x == col && l.y == row);
 
                         dataRow["loc" + (col - minX).ToString()] = Environment.NewLine + loc.Name + Environment.NewLine;
                     }

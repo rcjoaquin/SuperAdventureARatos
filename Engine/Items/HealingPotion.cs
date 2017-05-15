@@ -1,4 +1,4 @@
-﻿namespace Engine
+﻿namespace Engine.Items
 {
     public class HealingPotion : Item
     {
@@ -8,6 +8,8 @@
             : base(id, name, namePlural, price)
         {
             AmountToHeal = amountToHeal;
+            this._type = Item.ItemType.HealingPotion;
+
         }
     }
 }

@@ -18,7 +18,7 @@ namespace SuperAdventure
 
         private void frmLoadingPlayer_Load(object sender, EventArgs e)
         {
-            if (World.CreateWorldFromXmlString(File.ReadAllText(Path.Combine(Environment.CurrentDirectory, "Worlds", "WorldData.xml"))))
+            if (World.LoadWorld(File.ReadAllText(Path.Combine(Environment.CurrentDirectory, "Worlds", "WorldData.xml"))))
                 this.Close();
         }
     }

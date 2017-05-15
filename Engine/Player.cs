@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Xml;
+using Engine.Items;
+using Engine.Messages;
 
 namespace Engine
 {
@@ -154,7 +156,7 @@ namespace Engine
         {
             if(PlayerDoesNotHaveTheRequiredItemToEnter(location))
             {
-                RaiseMessage("You must have a " + location.ItemRequiredToEnter.Name + " to enter this location.");
+                RaiseMessage(MessageTypes.NeedAKey,  location.ItemRequiredToEnter.Name);
                 return;
             }
 
@@ -491,7 +493,7 @@ namespace Engine
 
             if(IsDead)
             {
-                RaiseMessage("The " + CurrentMonster.Name + " killed you.");
+                RaiseMessage(MessageTypes.MosterKilledYou, CurrentMonster.Name);
 
                 MoveHome();
             }
@@ -544,6 +546,22 @@ namespace Engine
             if(OnMessage != null)
             {
                 OnMessage(this, new MessageEventArgs(message, addExtraNewLine));
+            }
+        }
+
+        private void RaiseMessage(MessageTypes MessageType, string name)
+        {
+            if (OnMessage != null)
+            {
+                OnMessage(this, new MessageEventArgs(MessageType, name));
+            }
+        }
+
+        private void RaiseMessage(MessageTypes MessageType)
+        {
+            if (OnMessage != null)
+            {
+                OnMessage(this, new MessageEventArgs(MessageType));
             }
         }
     }
