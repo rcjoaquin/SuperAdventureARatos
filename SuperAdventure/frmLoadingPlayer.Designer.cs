@@ -28,19 +28,19 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
+            this.lblDescription = new System.Windows.Forms.Label();
             this.pbLoad = new System.Windows.Forms.ProgressBar();
             this.SuspendLayout();
             // 
-            // label1
+            // lblDescription
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(91, 9);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(120, 18);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Loading World ...";
+            this.lblDescription.AutoSize = true;
+            this.lblDescription.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDescription.Location = new System.Drawing.Point(91, 9);
+            this.lblDescription.Name = "lblDescription";
+            this.lblDescription.Size = new System.Drawing.Size(99, 18);
+            this.lblDescription.TabIndex = 0;
+            this.lblDescription.Text = "Description ...";
             // 
             // pbLoad
             // 
@@ -55,7 +55,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(300, 103);
             this.Controls.Add(this.pbLoad);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.lblDescription);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "frmLoadingPlayer";
             this.ShowIcon = false;
@@ -69,7 +69,7 @@
 
         #endregion
 
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblDescription;
         private System.Windows.Forms.ProgressBar pbLoad;
     }
 }

@@ -27,41 +27,13 @@ namespace SuperAdventure
         
         private void lbItems_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if(lbItems.Items.Count > 0)
+            if (lbItems.Items.Count > 0)
             {
+                int ItemId = int.Parse(lbItems.SelectedValue.ToString());
 
-            
-                Item item = World.ItemByID(int.Parse(lbItems.SelectedValue.ToString()));
+                frmItemDetailed fItemDetailed = new frmItemDetailed(ItemId);
 
-                txtName.Text = item.Name;
-                txtNamePlural.Text = item.NamePlural;
-                txtID.Text = item.ID.ToString();
-                txtPrice.Text = item.Price.ToString();
-
-
-                chIsWeapon.Visible = item.IsWeapon();
-                txtMinimumDamage.Visible = item.IsWeapon();
-                txtMaximumDamage.Visible = item.IsWeapon();
-
-                if (item.IsWeapon())
-                {
-                    Weapon weapon = (Weapon) World.ItemByID(int.Parse(lbItems.SelectedValue.ToString()));
-
-                    txtMinimumDamage.Text = weapon.MinimumDamage.ToString();
-                    txtMaximumDamage.Text = weapon.MaximumDamage.ToString();
-                }
-
-
-                chIsHealingPotion.Visible = item.IsHealingPotion();
-                txtAmountToHeal.Visible = item.IsHealingPotion();
-
-                if (item.IsHealingPotion())
-                {
-                    HealingPotion healingPotion = (HealingPotion)World.ItemByID(int.Parse(lbItems.SelectedValue.ToString()));
-
-                    txtAmountToHeal.Text = healingPotion.AmountToHeal.ToString();
-                
-                }
+                fItemDetailed.ShowDialog();
             }
         }
     }

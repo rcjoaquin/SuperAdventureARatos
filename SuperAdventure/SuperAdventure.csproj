@@ -32,6 +32,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="Microsoft.VisualBasic.PowerPacks.Vs, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -44,6 +46,54 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\ctrlLocation.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\ctrlLocation.Designer.cs">
+      <DependentUpon>ctrlLocation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmInventoryItemDetailed.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmInventoryItemDetailed.Designer.cs">
+      <DependentUpon>frmInventoryItemDetailed.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmVendorDetailed.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmVendorDetailed.Designer.cs">
+      <DependentUpon>frmVendorDetailed.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmQuestCompletionItemDetailed.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmQuestCompletionItemDetailed.Designer.cs">
+      <DependentUpon>frmQuestCompletionItemDetailed.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmQuestDetailed.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmQuestDetailed.Designer.cs">
+      <DependentUpon>frmQuestDetailed.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmLootItemDetailed.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmLootItemDetailed.Designer.cs">
+      <DependentUpon>frmLootItemDetailed.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmMonsterDetailed.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmMonsterDetailed.Designer.cs">
+      <DependentUpon>frmMonsterDetailed.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmItemDetailed.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmItemDetailed.Designer.cs">
+      <DependentUpon>frmItemDetailed.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmItem.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -100,11 +150,47 @@
     <Compile Include="TradingScreen.Designer.cs">
       <DependentUpon>TradingScreen.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Controls\ctrlLocation.resx">
+      <DependentUpon>ctrlLocation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmInventoryItemDetailed.resx">
+      <DependentUpon>frmInventoryItemDetailed.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmLocation.resx">
+      <DependentUpon>frmLocation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmVendorDetailed.resx">
+      <DependentUpon>frmVendorDetailed.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmQuestCompletionItemDetailed.resx">
+      <DependentUpon>frmQuestCompletionItemDetailed.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmQuestDetailed.resx">
+      <DependentUpon>frmQuestDetailed.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmLootItemDetailed.resx">
+      <DependentUpon>frmLootItemDetailed.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmMonsterDetailed.resx">
+      <DependentUpon>frmMonsterDetailed.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmItemDetailed.resx">
+      <DependentUpon>frmItemDetailed.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmItem.resx">
       <DependentUpon>frmItem.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmLoadingPlayer.resx">
       <DependentUpon>frmLoadingPlayer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmMonster.resx">
+      <DependentUpon>frmMonster.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmQuest.resx">
+      <DependentUpon>frmQuest.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmVendor.resx">
+      <DependentUpon>frmVendor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmWorld.resx">
       <DependentUpon>frmWorld.cs</DependentUpon>

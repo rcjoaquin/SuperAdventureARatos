@@ -12,7 +12,7 @@ namespace Engine
     
     public static class World
     {
-        public static List<Location> place2;
+        private static List<Location> place;
 
         private static readonly List<Item> _items = new List<Item>();
         private static readonly List<Monster> _monsters = new List<Monster>();
@@ -24,10 +24,10 @@ namespace Engine
         public const int ITEM_ID_RUSTY_SWORD = 1;
         public const int LOCATION_ID_HOME = 1;
 
-        private static int minX;
-        private static int maxX;
-        private static int minY;
-        private static int maxY;
+        public static int minX;
+        public static int maxX;
+        public static int minY;
+        public static int maxY;
 
         public static Item ItemByID(int id)
         {
@@ -223,6 +223,14 @@ namespace Engine
 
                     Location location = new Location(Id, Name, Description);
 
+                    if (node.SelectSingleNode("Picture") != null)
+                    {
+                        string Picture = node.SelectSingleNode("Picture").InnerText;
+                        location.Picture = Picture;
+                    }
+
+                    
+
                     if (node.SelectSingleNode("ItemRequiredToEnter") != null)
                     {
                         location.ItemRequiredToEnter = ItemByID(Convert.ToInt32(node.SelectSingleNode("ItemRequiredToEnter").InnerText));
@@ -295,45 +303,45 @@ namespace Engine
         
         public static void CalculateXYLocations()
         {
-            Location loc = place2[place2.Count - 1];
+            Location loc = place[place.Count - 1];
 
-            if (loc.LocationToNorth != null && !place2.Exists(l => l.ID == loc.LocationToNorth.ID))
+            if (loc.LocationToNorth != null && !place.Exists(l => l.ID == loc.LocationToNorth.ID))
             {
                 Location newLocation = loc.LocationToNorth;
                 newLocation.x = loc.x;
                 newLocation.y = loc.y - 1;
                 
-                place2.Add(newLocation);
+                place.Add(newLocation);
                 CalculateXYLocations();
             }
 
-            if (loc.LocationToSouth != null && !place2.Exists(l => l.ID == loc.LocationToSouth.ID))
+            if (loc.LocationToSouth != null && !place.Exists(l => l.ID == loc.LocationToSouth.ID))
             {
                 Location newLocation = loc.LocationToSouth;
                 newLocation.x = loc.x;
                 newLocation.y = loc.y + 1;
                 
-                place2.Add(newLocation);
+                place.Add(newLocation);
                 CalculateXYLocations();
             }
 
-            if (loc.LocationToEast != null && !place2.Exists(l => l.ID == loc.LocationToEast.ID))
+            if (loc.LocationToEast != null && !place.Exists(l => l.ID == loc.LocationToEast.ID))
             {
                 Location newLocation = loc.LocationToEast;
                 newLocation.x = loc.x +1;
                 newLocation.y = loc.y;
                 
-                place2.Add(newLocation);
+                place.Add(newLocation);
                 CalculateXYLocations();
             }
 
-            if (loc.LocationToWest != null && !place2.Exists(l => l.ID == loc.LocationToWest.ID))
+            if (loc.LocationToWest != null && !place.Exists(l => l.ID == loc.LocationToWest.ID))
             {
                 Location newLocation = loc.LocationToWest;
                 newLocation.x = loc.x -1;
                 newLocation.y = loc.y;
                 
-                place2.Add(newLocation);
+                place.Add(newLocation);
                 CalculateXYLocations();
             }
         }
@@ -345,7 +353,7 @@ namespace Engine
             minY = _locations.Count;
             maxY = _locations.Count;
 
-            place2.ForEach(l => {
+            place.ForEach(l => {
 
                 if (l.x < minX)
                     minX = l.x;
@@ -361,16 +369,34 @@ namespace Engine
             });
         }
 
-        public static DataTable GetDataTablePlace()
+        public static List<Location> GetPlace()
         {
             Location home = LocationByID(LOCATION_ID_HOME);
 
-            place2 = new List<Location>();
+            place = new List<Location>();
 
             home.x = _locations.Count;
             home.y = _locations.Count;
 
-            place2.Add(home);
+            place.Add(home);
+
+            CalculateXYLocations();
+
+            CalculateMinMaxXY();
+
+            return place;
+        }
+
+        public static DataTable GetDataTablePlace()
+        {
+            Location home = LocationByID(LOCATION_ID_HOME);
+
+            place = new List<Location>();
+
+            home.x = _locations.Count;
+            home.y = _locations.Count;
+
+            place.Add(home);
 
             CalculateXYLocations();
 
@@ -390,10 +416,10 @@ namespace Engine
 
                 for (int col = minX; col <= maxX; col++)
                 {
-                    if (World.place2.Find(l => l.x == col && l.y == row) != null)
+                    if (World.place.Find(l => l.x == col && l.y == row) != null)
                     {
 
-                        Location loc = World.place2.Find(l => l.x == col && l.y == row);
+                        Location loc = World.place.Find(l => l.x == col && l.y == row);
 
                         dataRow["loc" + (col - minX).ToString()] = Environment.NewLine + loc.Name + Environment.NewLine;
                     }

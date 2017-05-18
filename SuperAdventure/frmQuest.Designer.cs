@@ -28,11 +28,32 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            this.lbQuests = new System.Windows.Forms.ListBox();
+            this.SuspendLayout();
+            // 
+            // lbQuests
+            // 
+            this.lbQuests.FormattingEnabled = true;
+            this.lbQuests.Location = new System.Drawing.Point(12, 12);
+            this.lbQuests.Name = "lbQuests";
+            this.lbQuests.Size = new System.Drawing.Size(143, 238);
+            this.lbQuests.TabIndex = 2;
+            // 
+            // frmQuest
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Text = "frmQuest";
+            this.ClientSize = new System.Drawing.Size(173, 261);
+            this.Controls.Add(this.lbQuests);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.Name = "frmQuest";
+            this.Text = "Quests";
+            this.ResumeLayout(false);
+
         }
 
         #endregion
+
+        private System.Windows.Forms.ListBox lbQuests;
     }
 }

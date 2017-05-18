@@ -28,11 +28,32 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            this.lbVendors = new System.Windows.Forms.ListBox();
+            this.SuspendLayout();
+            // 
+            // lbVendors
+            // 
+            this.lbVendors.FormattingEnabled = true;
+            this.lbVendors.Location = new System.Drawing.Point(12, 12);
+            this.lbVendors.Name = "lbVendors";
+            this.lbVendors.Size = new System.Drawing.Size(143, 238);
+            this.lbVendors.TabIndex = 3;
+            // 
+            // frmVendor
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(168, 261);
+            this.Controls.Add(this.lbVendors);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.Name = "frmVendor";
             this.Text = "frmVendor";
+            this.ResumeLayout(false);
+
         }
 
         #endregion
+
+        private System.Windows.Forms.ListBox lbVendors;
     }
 }

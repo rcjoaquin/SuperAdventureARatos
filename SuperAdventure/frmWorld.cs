@@ -6,6 +6,7 @@ using System.IO;
 using System.Net;
 using System.Windows.Forms;
 using Engine;
+using SuperAdventure.Controls;
 
 namespace SuperAdventure
 {
@@ -15,31 +16,55 @@ namespace SuperAdventure
         {
             InitializeComponent();
 
-            DataGridViewImageColumn iconColumn = new DataGridViewImageColumn();
+            List<Location> place = World.GetPlace();
 
-            WebClient client = new WebClient();
-            Stream stream = client.OpenRead("http://img1.wikia.nocookie.net/__cb20101219155130/uncyclopedia/images/7/70/Facebooklogin.png");
-            Bitmap bitmap;
-            bitmap = new Bitmap(stream);
+            tblpWorld.ColumnCount = World.maxX - World.minX +1;
+            tblpWorld.RowCount = World.maxY - World.minY +1;
 
-            iconColumn.Image = bitmap;
-            iconColumn.Name = "Tree";
-            iconColumn.HeaderText = "Nice tree";
+            for (int row = World.minY; row <= World.maxY; row++)
+            {
+                for (int col = World.minX; col <= World.maxX; col++)
+                {
+                    if (place.Find(l => l.x == col && l.y == row) != null)
+                    {
+
+                        Location loc = place.Find(l => l.x == col && l.y == row);
+
+
+                        tblpWorld.Controls.Add((string.IsNullOrEmpty(loc.Picture)) ? new ctrlLocation(loc.Name) : new ctrlLocation(loc.Name, loc.Picture), col - World.minX, row - World.minY);
+
+                    }
+
+                }
+
+            }
+
+            tblpWorld.AutoSize = true;
             
-
-            DataTable dataTablePlace = World.GetDataTablePlace();
-
-            dgvWorld.DataSource = dataTablePlace;
-
-            dgvWorld.Columns.Insert(6, iconColumn);
-
-            dgvWorld.RowTemplate.Height = 100;
         }
 
         private void itemsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             frmItem fITem = new frmItem();
             fITem.ShowDialog();
+        }
+
+        private void monstersToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmMonster fMonster = new frmMonster();
+            fMonster.ShowDialog();
+        }
+
+        private void questsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmQuest fQuest = new frmQuest();
+            fQuest.ShowDialog();
+        }
+
+        private void vendorsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmVendor fVendor = new frmVendor();
+            fVendor.ShowDialog();
         }
     }
 }
