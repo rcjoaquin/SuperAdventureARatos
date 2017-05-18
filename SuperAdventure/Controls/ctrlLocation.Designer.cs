@@ -69,6 +69,7 @@
             this.Picture.Size = new System.Drawing.Size(128, 128);
             this.Picture.TabIndex = 2;
             this.Picture.TabStop = false;
+            this.Picture.Click += new System.EventHandler(this.Picture_Click);
             // 
             // ctrlLocation
             // 

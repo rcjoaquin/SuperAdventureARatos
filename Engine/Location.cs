@@ -35,6 +35,7 @@ namespace Engine
 
         public bool HasAMonster { get { return _monstersAtLocation.Count > 0; } }
         public bool HasAQuest { get { return QuestAvailableHere != null; } }
+        public bool HasAItemRequiredToEnter { get { return ItemRequiredToEnter != null; } }
         public bool DoesNotHaveAnItemRequiredToEnter { get { return ItemRequiredToEnter == null; } }
 
         public Location(int id, string name, string description, 

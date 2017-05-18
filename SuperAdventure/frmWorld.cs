@@ -30,8 +30,7 @@ namespace SuperAdventure
 
                         Location loc = place.Find(l => l.x == col && l.y == row);
 
-
-                        tblpWorld.Controls.Add((string.IsNullOrEmpty(loc.Picture)) ? new ctrlLocation(loc.Name) : new ctrlLocation(loc.Name, loc.Picture), col - World.minX, row - World.minY);
+                        tblpWorld.Controls.Add((string.IsNullOrEmpty(loc.Picture)) ? new ctrlLocation(loc.ID, loc.Name) : new ctrlLocation(loc.ID, loc.Name, loc.Picture), col - World.minX, row - World.minY);
 
                     }
 
