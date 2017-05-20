@@ -7,3 +7,12 @@ C:\GitHub\SuperAdventureARatos\SuperAdventureConsole\bin\Debug\Engine.dll
 C:\GitHub\SuperAdventureARatos\SuperAdventureConsole\bin\Debug\Engine.pdb
 C:\GitHub\SuperAdventureARatos\SuperAdventureConsole\obj\Debug\SuperAdventureConsole.exe
 C:\GitHub\SuperAdventureARatos\SuperAdventureConsole\obj\Debug\SuperAdventureConsole.pdb
+C:\GitHub\SuperAdventureARatos\SuperAdventureARatos\SuperAdventureConsole\bin\Debug\WorldData.xml
+C:\GitHub\SuperAdventureARatos\SuperAdventureARatos\SuperAdventureConsole\bin\Debug\SuperAdventureConsole.exe.config
+C:\GitHub\SuperAdventureARatos\SuperAdventureARatos\SuperAdventureConsole\bin\Debug\SuperAdventureConsole.exe
+C:\GitHub\SuperAdventureARatos\SuperAdventureARatos\SuperAdventureConsole\bin\Debug\SuperAdventureConsole.pdb
+C:\GitHub\SuperAdventureARatos\SuperAdventureARatos\SuperAdventureConsole\bin\Debug\Engine.dll
+C:\GitHub\SuperAdventureARatos\SuperAdventureARatos\SuperAdventureConsole\bin\Debug\Engine.pdb
+C:\GitHub\SuperAdventureARatos\SuperAdventureARatos\SuperAdventureConsole\obj\Debug\SuperAdventureConsole.csprojResolveAssemblyReference.cache
+C:\GitHub\SuperAdventureARatos\SuperAdventureARatos\SuperAdventureConsole\obj\Debug\SuperAdventureConsole.exe
+C:\GitHub\SuperAdventureARatos\SuperAdventureARatos\SuperAdventureConsole\obj\Debug\SuperAdventureConsole.pdb

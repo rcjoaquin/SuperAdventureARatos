@@ -15,15 +15,18 @@ namespace SuperAdventure
     public partial class frmLocation : Form
     {
         private Location location;
+        private Common.Mode mode;
 
         public frmLocation()
         {
             InitializeComponent();
+            mode = Common.Mode.New;
         }
 
         public frmLocation(int IdLocation)
         {
             InitializeComponent();
+            mode = Common.Mode.Edit;
             this.location = World.LocationByID(IdLocation);
 
             lbLocation.Text = this.location.Name;
@@ -36,6 +39,8 @@ namespace SuperAdventure
                     this.Picture.Image = bitmap;
                 }
             }
+
+            txtDescription.Text = this.location.Description;
             //this.location.HasItemRequiredToEnter
             //this.location.HasAMonster
             //this.location.HasAQuest            

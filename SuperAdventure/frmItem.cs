@@ -36,5 +36,11 @@ namespace SuperAdventure
                 fItemDetailed.ShowDialog();
             }
         }
+
+        private void btnAddItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
     }
 }

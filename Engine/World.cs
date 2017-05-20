@@ -6,19 +6,20 @@ using System.Linq;
 using System.Xml;
 using Engine.Characters;
 using Engine.Items;
+using Engine.Messages;
 
 namespace Engine
 {
     
-    public static class World
+    public class World
     {
         private static List<Location> place;
 
-        private static readonly List<Item> _items = new List<Item>();
-        private static readonly List<Monster> _monsters = new List<Monster>();
-        private static readonly List<Quest> _quests = new List<Quest>();
-        private static readonly List<Location> _locations = new List<Location>();
-        private static readonly List<Vendor> _vendors = new List<Vendor>();
+        private static List<Item> _items = new List<Item>();
+        private static List<Monster> _monsters = new List<Monster>();
+        private static List<Quest> _quests = new List<Quest>();
+        private static List<Location> _locations = new List<Location>();
+        private static List<Vendor> _vendors = new List<Vendor>();
 
         public const int UNSELLABLE_ITEM_PRICE = -1;
         public const int ITEM_ID_RUSTY_SWORD = 1;
@@ -29,6 +30,8 @@ namespace Engine
         public static int minY;
         public static int maxY;
 
+        public static event EventHandler<MessageEventArgs> OnMessage;
+
         public static Item ItemByID(int id)
         {
             return _items.SingleOrDefault(x => x.ID == id);
@@ -37,6 +40,11 @@ namespace Engine
         public static List<Item> ListItems()
         {
             return _items;
+        }
+
+        public static void AddItem(string Name, string NamePlural, int Price)
+        {
+            _items.Add(new Item(_items.Count, Name,NamePlural, Price));
         }
 
         public static Monster MonsterByID(int id)
@@ -91,7 +99,9 @@ namespace Engine
                 worldData.LoadXml(xmlWorld);
 
                 pasos = "Cargando los Elementos";
+                RaiseMessage(MessageTypes.LoadingItems);
                 #region Populate Items
+                _items = new List<Item>();
                 foreach (XmlNode node in worldData.SelectNodes("/World/items/item"))
                 {
                     int Id = Convert.ToInt32(node.SelectSingleNode("Id").InnerText);
@@ -104,6 +114,7 @@ namespace Engine
                 #endregion
 
                 pasos = "Cargando las Armas";
+
                 #region Populate Weapons
                 foreach (XmlNode node in worldData.SelectNodes("/World/items/weapon"))
                 {
@@ -133,7 +144,9 @@ namespace Engine
                 #endregion
 
                 pasos = "Cargando los Monstruos";
+                RaiseMessage(MessageTypes.LoadingMonsters);
                 #region Populate Monsters
+                _monsters = new List<Monster>();
                 foreach (XmlNode node in worldData.SelectNodes("/World/Monsters/Monster"))
                 {
                     int Id = Convert.ToInt32(node.SelectSingleNode("Id").InnerText);
@@ -161,7 +174,9 @@ namespace Engine
                 #endregion
 
                 pasos = "Cargando las Quests";
+                RaiseMessage(MessageTypes.LoadingQuests);
                 #region Populate Quests
+                _quests = new List<Quest>();
                 foreach (XmlNode node in worldData.SelectNodes("/World/Quests/Quest"))
                 {
                     int Id = Convert.ToInt32(node.SelectSingleNode("Id").InnerText);
@@ -192,7 +207,9 @@ namespace Engine
                 #endregion
 
                 pasos = "Cargando los Vendedores";
+                RaiseMessage(MessageTypes.LoadingVendors);
                 #region Populate Vendors
+                _vendors = new List<Vendor>();
                 foreach (XmlNode node in worldData.SelectNodes("/World/Vendors/Vendor"))
                 {
                     int Id = Convert.ToInt32(node.SelectSingleNode("Id").InnerText);
@@ -214,7 +231,9 @@ namespace Engine
                 #endregion
 
                 pasos = "Cargando las localizaciones";
+                RaiseMessage(MessageTypes.LoadingLocations);
                 #region Populate Locations
+                _locations = new List<Location>();
                 foreach (XmlNode node in worldData.SelectNodes("/World/Locations/Location"))
                 {
                     int Id = Convert.ToInt32(node.SelectSingleNode("Id").InnerText);
@@ -435,6 +454,15 @@ namespace Engine
             }
 
             return dataTablePlace;
+        }
+
+        private static void RaiseMessage(MessageTypes MessageType)
+        {
+            if (OnMessage != null)
+            {
+                OnMessage(null, new MessageEventArgs(MessageType));
+                //OnMessage(this, new MessageEventArgs(MessageType, name));
+            }
         }
     }
 }

@@ -10,3 +10,9 @@ C:\Users\Operador\Source\Repos\SuperAdventureARatos\Engine\bin\Debug\Engine.pdb
 C:\Users\Operador\Source\Repos\SuperAdventureARatos\Engine\obj\Debug\Engine.csprojResolveAssemblyReference.cache
 C:\Users\Operador\Source\Repos\SuperAdventureARatos\Engine\obj\Debug\Engine.dll
 C:\Users\Operador\Source\Repos\SuperAdventureARatos\Engine\obj\Debug\Engine.pdb
+C:\GitHub\SuperAdventureARatos\SuperAdventureARatos\Engine\bin\Debug\WorldData.xml
+C:\GitHub\SuperAdventureARatos\SuperAdventureARatos\Engine\bin\Debug\Engine.dll
+C:\GitHub\SuperAdventureARatos\SuperAdventureARatos\Engine\bin\Debug\Engine.pdb
+C:\GitHub\SuperAdventureARatos\SuperAdventureARatos\Engine\obj\Debug\Engine.csprojResolveAssemblyReference.cache
+C:\GitHub\SuperAdventureARatos\SuperAdventureARatos\Engine\obj\Debug\Engine.dll
+C:\GitHub\SuperAdventureARatos\SuperAdventureARatos\Engine\obj\Debug\Engine.pdb

@@ -3,6 +3,7 @@ using System.Windows.Forms;
 using System.IO;
 
 using Engine;
+using Engine.Messages;
 
 namespace SuperAdventure
 {
@@ -11,15 +12,30 @@ namespace SuperAdventure
         public frmLoadingPlayer()
         {
             InitializeComponent();
-
-
             
         }
 
         private void frmLoadingPlayer_Load(object sender, EventArgs e)
         {
-            if (World.LoadWorld(File.ReadAllText(Path.Combine(Environment.CurrentDirectory, "Worlds", "WorldData.xml"))))
+            frmChooseWorld fChooseWorld = new frmChooseWorld();
+            fChooseWorld.ShowDialog();
+            
+            World.OnMessage += DisplayMessage;
+
+            string WorldChoose = fChooseWorld.WorldChoose;
+
+            if (World.LoadWorld(File.ReadAllText(Path.Combine(Environment.CurrentDirectory, "Worlds", WorldChoose))))
+            {
                 this.Close();
+            }
+
+        }
+
+        private void DisplayMessage(object sender, MessageEventArgs messageEventArgs)
+        {
+            lblDescription.Text = messageEventArgs.Message;
+
+            pbLoad.Value = messageEventArgs.Percentage;
         }
     }
 }

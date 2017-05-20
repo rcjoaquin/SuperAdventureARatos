@@ -15,18 +15,26 @@ namespace SuperAdventure
     public partial class frmItemDetailed : Form
     {
         private int ItemId;
+        private Common.Mode mode;
 
         public frmItemDetailed()
         {
             InitializeComponent();
 
             this.Text = "New Item";
+            mode = Common.Mode.New;
+
+            btnActionItem.Text = "Save";
         }
 
         public frmItemDetailed(int Id)
         {
             this.ItemId = Id;
             InitializeComponent();
+            mode = Common.Mode.Edit;
+
+            btnActionItem.Text = "Delete";
+
             this.Text = "Item Id : "+ this.ItemId.ToString();
 
             Item item = World.ItemByID(this.ItemId);
@@ -58,6 +66,17 @@ namespace SuperAdventure
 
             }
         }
-        
+
+        private void btnActionItem_Click(object sender, EventArgs e)
+        {
+            if(mode.Equals(Common.Mode.New))
+            {
+                
+            }
+            else if (mode.Equals(Common.Mode.Edit))
+            {
+
+            }
+        }
     }
 }

@@ -32,6 +32,8 @@
             this.LocationName = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.lbLocation = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.txtDescription = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.Picture)).BeginInit();
             this.SuspendLayout();
             // 
@@ -72,11 +74,30 @@
             this.lbLocation.TabIndex = 6;
             this.lbLocation.Text = "Location Name";
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(12, 265);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(60, 13);
+            this.label2.TabIndex = 7;
+            this.label2.Text = "Description";
+            // 
+            // txtDescription
+            // 
+            this.txtDescription.Location = new System.Drawing.Point(15, 282);
+            this.txtDescription.Multiline = true;
+            this.txtDescription.Name = "txtDescription";
+            this.txtDescription.Size = new System.Drawing.Size(257, 88);
+            this.txtDescription.TabIndex = 8;
+            // 
             // frmLocation
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 261);
+            this.ClientSize = new System.Drawing.Size(284, 382);
+            this.Controls.Add(this.txtDescription);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.lbLocation);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.Picture);
@@ -96,5 +117,7 @@
         private System.Windows.Forms.Label LocationName;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label lbLocation;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox txtDescription;
     }
 }

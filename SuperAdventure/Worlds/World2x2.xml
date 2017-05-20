@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8" ?> 
+<World>
+  <items>  
+  </items>
+  <Monsters>
+  </Monsters>
+  <Quests>
+  </Quests>
+  <Vendors>
+  </Vendors>
+  <Locations>
+    <Location>
+      <Id>1</Id>
+      <Name>Forest</Name>
+      <Description>You see nothing that trees and grass.</Description>
+    </Location>
+    <Location>
+      <Id>2</Id>
+      <Name>Forest</Name>
+      <Description>You see nothing that trees and grass.</Description>
+    </Location>
+    <Location>
+      <Id>3</Id>
+      <Name>Forest</Name>
+      <Description>You see nothing that trees and grass.</Description>
+    </Location>
+    <Location>
+      <Id>4</Id>
+      <Name>Forest</Name>
+      <Description>You see nothing that trees and grass.</Description>
+    </Location>
+  </Locations>
+  <Neighborhood>
+    <Neighbor>
+          <IdLocation>1</IdLocation>
+          <North>2</North>
+          <East>3</East>
+    </Neighbor>  
+    <Neighbor>
+          <IdLocation>2</IdLocation>
+          <South>1</South>
+          <East>4</East>           
+    </Neighbor>
+    <Neighbor>
+          <IdLocation>3</IdLocation>
+          <North>4</North> 
+          <West>1</West>
+    </Neighbor> 
+    <Neighbor>
+          <IdLocation>4</IdLocation>
+          <West>2</West> 
+          <South>3</South>
+    </Neighbor>
+  </Neighborhood> 
+</World>

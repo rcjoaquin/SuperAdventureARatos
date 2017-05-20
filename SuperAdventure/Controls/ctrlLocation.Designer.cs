@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.LocationName = new System.Windows.Forms.Label();
-            this.shapeContainer1 = new Microsoft.VisualBasic.PowerPacks.ShapeContainer();
-            this.rectangleShape1 = new Microsoft.VisualBasic.PowerPacks.RectangleShape();
+            //this.shapeContainer1 = new Microsoft.VisualBasic.PowerPacks.ShapeContainer();
+            //this.rectangleShape1 = new Microsoft.VisualBasic.PowerPacks.RectangleShape();
             this.Picture = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.Picture)).BeginInit();
             this.SuspendLayout();
@@ -46,21 +46,21 @@
             // 
             // shapeContainer1
             // 
-            this.shapeContainer1.Location = new System.Drawing.Point(0, 0);
-            this.shapeContainer1.Margin = new System.Windows.Forms.Padding(0);
-            this.shapeContainer1.Name = "shapeContainer1";
-            this.shapeContainer1.Shapes.AddRange(new Microsoft.VisualBasic.PowerPacks.Shape[] {
-            this.rectangleShape1});
-            this.shapeContainer1.Size = new System.Drawing.Size(160, 160);
-            this.shapeContainer1.TabIndex = 1;
-            this.shapeContainer1.TabStop = false;
+            //this.shapeContainer1.Location = new System.Drawing.Point(0, 0);
+            //this.shapeContainer1.Margin = new System.Windows.Forms.Padding(0);
+            //this.shapeContainer1.Name = "shapeContainer1";
+            //this.shapeContainer1.Shapes.AddRange(new Microsoft.VisualBasic.PowerPacks.Shape[] {
+            //this.rectangleShape1});
+            //this.shapeContainer1.Size = new System.Drawing.Size(160, 160);
+            //this.shapeContainer1.TabIndex = 1;
+            //this.shapeContainer1.TabStop = false;
             // 
             // rectangleShape1
             // 
-            this.rectangleShape1.Location = new System.Drawing.Point(4, 2);
-            this.rectangleShape1.Name = "rectangleShape1";
-            this.rectangleShape1.Size = new System.Drawing.Size(152, 140);
-            // 
+            //this.rectangleShape1.Location = new System.Drawing.Point(4, 2);
+            //this.rectangleShape1.Name = "rectangleShape1";
+            //this.rectangleShape1.Size = new System.Drawing.Size(152, 140);
+            //// 
             // Picture
             // 
             this.Picture.BackColor = System.Drawing.Color.Black;
@@ -78,7 +78,7 @@
             this.BackColor = System.Drawing.Color.White;
             this.Controls.Add(this.Picture);
             this.Controls.Add(this.LocationName);
-            this.Controls.Add(this.shapeContainer1);
+            //this.Controls.Add(this.shapeContainer1);
             this.Name = "ctrlLocation";
             this.Size = new System.Drawing.Size(160, 160);
             ((System.ComponentModel.ISupportInitialize)(this.Picture)).EndInit();
@@ -90,8 +90,8 @@
         #endregion
 
         private System.Windows.Forms.Label LocationName;
-        private Microsoft.VisualBasic.PowerPacks.ShapeContainer shapeContainer1;
-        private Microsoft.VisualBasic.PowerPacks.RectangleShape rectangleShape1;
+        //private Microsoft.VisualBasic.PowerPacks.ShapeContainer shapeContainer1;
+        //private Microsoft.VisualBasic.PowerPacks.RectangleShape rectangleShape1;
         private System.Windows.Forms.PictureBox Picture;
     }
 }

@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.lbItems = new System.Windows.Forms.ListBox();
+            this.btnAddItem = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lbItems
@@ -39,11 +40,22 @@
             this.lbItems.Size = new System.Drawing.Size(143, 238);
             this.lbItems.TabIndex = 0;
             // 
+            // btnAddItem
+            // 
+            this.btnAddItem.Location = new System.Drawing.Point(13, 264);
+            this.btnAddItem.Name = "btnAddItem";
+            this.btnAddItem.Size = new System.Drawing.Size(143, 23);
+            this.btnAddItem.TabIndex = 1;
+            this.btnAddItem.Text = "+";
+            this.btnAddItem.UseVisualStyleBackColor = true;
+            this.btnAddItem.Click += new System.EventHandler(this.btnAddItem_Click);
+            // 
             // frmItem
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(171, 261);
+            this.ClientSize = new System.Drawing.Size(171, 299);
+            this.Controls.Add(this.btnAddItem);
             this.Controls.Add(this.lbItems);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "frmItem";
@@ -55,5 +67,6 @@
         #endregion
 
         private System.Windows.Forms.ListBox lbItems;
+        private System.Windows.Forms.Button btnAddItem;
     }
 }

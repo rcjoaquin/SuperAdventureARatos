@@ -44,6 +44,7 @@
             this.label7 = new System.Windows.Forms.Label();
             this.gpIsWeapon = new System.Windows.Forms.GroupBox();
             this.gpIsHealingPotion = new System.Windows.Forms.GroupBox();
+            this.btnActionItem = new System.Windows.Forms.Button();
             this.gpIsWeapon.SuspendLayout();
             this.gpIsHealingPotion.SuspendLayout();
             this.SuspendLayout();
@@ -184,11 +185,22 @@
             this.gpIsHealingPotion.TabStop = false;
             this.gpIsHealingPotion.Text = "Is Healing Potion";
             // 
+            // btnActionItem
+            // 
+            this.btnActionItem.Location = new System.Drawing.Point(15, 268);
+            this.btnActionItem.Name = "btnActionItem";
+            this.btnActionItem.Size = new System.Drawing.Size(237, 23);
+            this.btnActionItem.TabIndex = 19;
+            this.btnActionItem.Text = "-";
+            this.btnActionItem.UseVisualStyleBackColor = true;
+            this.btnActionItem.Click += new System.EventHandler(this.btnActionItem_Click);
+            // 
             // frmItemDetailed
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(264, 261);
+            this.ClientSize = new System.Drawing.Size(264, 303);
+            this.Controls.Add(this.btnActionItem);
             this.Controls.Add(this.gpIsHealingPotion);
             this.Controls.Add(this.gpIsWeapon);
             this.Controls.Add(this.txtPrice);
@@ -229,5 +241,6 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.GroupBox gpIsWeapon;
         private System.Windows.Forms.GroupBox gpIsHealingPotion;
+        private System.Windows.Forms.Button btnActionItem;
     }
 }

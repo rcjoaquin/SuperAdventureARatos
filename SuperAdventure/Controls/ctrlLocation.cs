@@ -35,11 +35,14 @@ namespace SuperAdventure.Controls
 
             Bitmap bitmap;
             using (var ms = new MemoryStream(Convert.FromBase64String(B64Image)))
-            {   
-                bitmap = new Bitmap(ms);
+            {
+                //GifImage gifImage = new GifImage(ms);
+                Image image = Image.FromStream(ms);
+                //bitmap = new Bitmap(ms);
                 this.LocationName.Text = Text;
                 this.location = World.LocationByID(IdLocation);
-                this.Picture.Image = bitmap;
+                //this.Picture.Image = gifImage.GetNextFrame();
+                this.Picture.Image = image;
             }
 
             
