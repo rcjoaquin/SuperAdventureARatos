@@ -314,14 +314,14 @@ namespace SuperAdventureConsole
             Console.WriteLine("PLAYER INVENTORY");
             Console.WriteLine("================");
 
-            if(_player.Inventory.Count(x => x.Price != World.UNSELLABLE_ITEM_PRICE) == 0)
+            if(_player.Inventory.Count(x => x.Price != Game.UNSELLABLE_ITEM_PRICE) == 0)
             {
                 Console.WriteLine("You do not have any inventory");
             }
             else
             {
                 foreach(
-                    InventoryItem inventoryItem in _player.Inventory.Where(x => x.Price != World.UNSELLABLE_ITEM_PRICE))
+                    InventoryItem inventoryItem in _player.Inventory.Where(x => x.Price != Game.UNSELLABLE_ITEM_PRICE))
                 {
                     Console.WriteLine("{0} {1} Price: {2}", inventoryItem.Quantity, inventoryItem.Description,
                         inventoryItem.Price);
@@ -409,7 +409,7 @@ namespace SuperAdventureConsole
                 InventoryItem itemToSell =
                     _player.Inventory.SingleOrDefault(x => x.Details.Name.ToLower() == itemName &&
                                                            x.Quantity > 0 &&
-                                                           x.Price != World.UNSELLABLE_ITEM_PRICE);
+                                                           x.Price != Game.UNSELLABLE_ITEM_PRICE);
 
                 // Check if the player has the item entered
                 if(itemToSell == null)

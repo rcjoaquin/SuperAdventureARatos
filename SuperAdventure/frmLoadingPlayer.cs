@@ -20,11 +20,13 @@ namespace SuperAdventure
             frmChooseWorld fChooseWorld = new frmChooseWorld();
             fChooseWorld.ShowDialog();
             
-            World.OnMessage += DisplayMessage;
-
             string WorldChoose = fChooseWorld.WorldChoose;
 
-            if (World.LoadWorld(File.ReadAllText(Path.Combine(Environment.CurrentDirectory, "Worlds", WorldChoose))))
+            Game.Instance.world = new World(File.ReadAllText(Path.Combine(Environment.CurrentDirectory, "Worlds", WorldChoose)));
+
+            Game.Instance.world.OnMessage += DisplayMessage;
+
+            if (Game.Instance.world.LoadWorld())
             {
                 this.Close();
             }

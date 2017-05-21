@@ -27,7 +27,7 @@ namespace SuperAdventure
         {
             InitializeComponent();
             mode = Common.Mode.Edit;
-            this.location = World.LocationByID(IdLocation);
+            this.location = Game.Instance.world.LocationByID(IdLocation);
 
             lbLocation.Text = this.location.Name;
             if(!string.IsNullOrEmpty(location.Picture))

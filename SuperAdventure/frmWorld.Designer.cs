@@ -35,16 +35,20 @@
             this.charactersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.vendorsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tblpWorld = new System.Windows.Forms.TableLayoutPanel();
+            this.worldsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.worldsToolStripMenuItem,
             this.itemsToolStripMenuItem,
             this.monstersToolStripMenuItem,
             this.questsToolStripMenuItem,
-            this.charactersToolStripMenuItem});
+            this.charactersToolStripMenuItem,
+            this.exitToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(929, 24);
@@ -83,7 +87,7 @@
             // vendorsToolStripMenuItem
             // 
             this.vendorsToolStripMenuItem.Name = "vendorsToolStripMenuItem";
-            this.vendorsToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
+            this.vendorsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.vendorsToolStripMenuItem.Text = "Vendors";
             this.vendorsToolStripMenuItem.Click += new System.EventHandler(this.vendorsToolStripMenuItem_Click);
             // 
@@ -101,6 +105,20 @@
             this.tblpWorld.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tblpWorld.Size = new System.Drawing.Size(200, 100);
             this.tblpWorld.TabIndex = 2;
+            // 
+            // worldsToolStripMenuItem
+            // 
+            this.worldsToolStripMenuItem.Name = "worldsToolStripMenuItem";
+            this.worldsToolStripMenuItem.Size = new System.Drawing.Size(56, 20);
+            this.worldsToolStripMenuItem.Text = "Worlds";
+            this.worldsToolStripMenuItem.Click += new System.EventHandler(this.worldsToolStripMenuItem_Click);
+            // 
+            // exitToolStripMenuItem
+            // 
+            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
+            this.exitToolStripMenuItem.Text = "Exit";
+            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
             // frmWorld
             // 
@@ -129,5 +147,7 @@
         private System.Windows.Forms.ToolStripMenuItem charactersToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem vendorsToolStripMenuItem;
         private System.Windows.Forms.TableLayoutPanel tblpWorld;
+        private System.Windows.Forms.ToolStripMenuItem worldsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
     }
 }

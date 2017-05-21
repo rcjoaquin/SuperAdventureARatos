@@ -82,8 +82,8 @@ namespace Engine
         public static Player CreateDefaultPlayer()
         {
             Player player = new Player(10, 10, 20, 0);
-            player.Inventory.Add(new InventoryItem(World.ItemByID(World.ITEM_ID_RUSTY_SWORD), 1));
-            player.CurrentLocation = World.LocationByID(World.LOCATION_ID_HOME);
+            player.Inventory.Add(new InventoryItem(Game.Instance.world.ItemByID(Game.ITEM_ID_RUSTY_SWORD), 1));
+            player.CurrentLocation = Game.Instance.world.LocationByID(Game.LOCATION_ID_HOME);
 
             return player;
         }
@@ -104,12 +104,12 @@ namespace Engine
                 Player player = new Player(currentHitPoints, maximumHitPoints, gold, experiencePoints);
 
                 int currentLocationID = Convert.ToInt32(playerData.SelectSingleNode("/Player/Stats/CurrentLocation").InnerText);
-                player.CurrentLocation = World.LocationByID(currentLocationID);
+                player.CurrentLocation = Game.Instance.world.LocationByID(currentLocationID);
 
                 if(playerData.SelectSingleNode("/Player/Stats/CurrentWeapon") != null)
                 {
                     int currentWeaponID = Convert.ToInt32(playerData.SelectSingleNode("/Player/Stats/CurrentWeapon").InnerText);
-                    player.CurrentWeapon = (Weapon)World.ItemByID(currentWeaponID);
+                    player.CurrentWeapon = (Weapon)Game.Instance.world.ItemByID(currentWeaponID);
                 }
 
                 foreach(XmlNode node in playerData.SelectNodes("/Player/InventoryItems/InventoryItem"))
@@ -119,7 +119,7 @@ namespace Engine
 
                     for(int i = 0; i < quantity; i++)
                     {
-                        player.AddItemToInventory(World.ItemByID(id));
+                        player.AddItemToInventory(Game.Instance.world.ItemByID(id));
                     }
                 }
 
@@ -128,7 +128,7 @@ namespace Engine
                     int id = Convert.ToInt32(node.Attributes["ID"].Value);
                     bool isCompleted = Convert.ToBoolean(node.Attributes["IsCompleted"].Value);
 
-                    PlayerQuest playerQuest = new PlayerQuest(World.QuestByID(id));
+                    PlayerQuest playerQuest = new PlayerQuest(Game.Instance.world.QuestByID(id));
                     playerQuest.IsCompleted = isCompleted;
 
                     player.Quests.Add(playerQuest);
@@ -147,7 +147,7 @@ namespace Engine
         {
             Player player = new Player(currentHitPoints, maximumHitPoints, gold, experiencePoints);
 
-            player.MoveTo(World.LocationByID(currentLocationID));
+            player.MoveTo(Game.Instance.world.LocationByID(currentLocationID));
 
             return player;
         }
@@ -511,7 +511,7 @@ namespace Engine
 
         private void MoveHome()
         {
-            MoveTo(World.LocationByID(World.LOCATION_ID_HOME));
+            MoveTo(Game.Instance.world.LocationByID(Game.LOCATION_ID_HOME));
         }
 
         private void CreateNewChildXmlNode(XmlDocument document, XmlNode parentNode, string elementName, object value)

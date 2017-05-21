@@ -37,7 +37,7 @@ namespace SuperAdventure
 
             this.Text = "Item Id : "+ this.ItemId.ToString();
 
-            Item item = World.ItemByID(this.ItemId);
+            Item item = Game.Instance.world.ItemByID(this.ItemId);
 
             txtName.Text = item.Name;
             txtNamePlural.Text = item.NamePlural;
@@ -50,7 +50,7 @@ namespace SuperAdventure
 
             if (item.IsWeapon())
             {
-                Weapon weapon = (Weapon)World.ItemByID(this.ItemId);
+                Weapon weapon = (Weapon)Game.Instance.world.ItemByID(this.ItemId);
 
                 txtMinimumDamage.Text = weapon.MinimumDamage.ToString();
                 txtMaximumDamage.Text = weapon.MaximumDamage.ToString();
@@ -60,7 +60,7 @@ namespace SuperAdventure
 
             if (item.IsHealingPotion())
             {
-                HealingPotion healingPotion = (HealingPotion)World.ItemByID(this.ItemId);
+                HealingPotion healingPotion = (HealingPotion)Game.Instance.world.ItemByID(this.ItemId);
 
                 txtAmountToHeal.Text = healingPotion.AmountToHeal.ToString();
 

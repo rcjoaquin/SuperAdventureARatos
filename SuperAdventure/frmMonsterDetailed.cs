@@ -30,7 +30,7 @@ namespace SuperAdventure
 
             this.Text = "Monster Id : "+ this.MonsterId.ToString();
 
-            Monster monster = World.MonsterByID(this.MonsterId);
+            Monster monster = Game.Instance.world.MonsterByID(this.MonsterId);
 
             txtName.Text = monster.Name.ToString();
 
@@ -54,7 +54,7 @@ namespace SuperAdventure
 
         private void lbLootItems_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Monster monster = World.MonsterByID(this.MonsterId);
+            Monster monster = Game.Instance.world.MonsterByID(this.MonsterId);
             if (lbLootItems.Items.Count > 0)
             {
                 int ItemId = int.Parse(lbLootItems.SelectedValue.ToString());

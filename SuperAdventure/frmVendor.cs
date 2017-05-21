@@ -16,7 +16,7 @@ namespace SuperAdventure
         public frmVendor()
         {
             InitializeComponent();
-            lbVendors.DataSource = World.ListVendors();
+            lbVendors.DataSource = Game.Instance.world.ListVendors();
             lbVendors.DisplayMember = "Name";
             lbVendors.ValueMember = "ID";
 

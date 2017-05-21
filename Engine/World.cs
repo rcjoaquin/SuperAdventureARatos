@@ -13,81 +13,86 @@ namespace Engine
     
     public class World
     {
-        private static List<Location> place;
+        private List<Location> place;
 
-        private static List<Item> _items = new List<Item>();
-        private static List<Monster> _monsters = new List<Monster>();
-        private static List<Quest> _quests = new List<Quest>();
-        private static List<Location> _locations = new List<Location>();
-        private static List<Vendor> _vendors = new List<Vendor>();
+        private List<Item> _items = new List<Item>();
+        private List<Monster> _monsters = new List<Monster>();
+        private List<Quest> _quests = new List<Quest>();
+        private List<Location> _locations = new List<Location>();
+        private List<Vendor> _vendors = new List<Vendor>();
 
-        public const int UNSELLABLE_ITEM_PRICE = -1;
-        public const int ITEM_ID_RUSTY_SWORD = 1;
-        public const int LOCATION_ID_HOME = 1;
+        private string _xmlWorld;
 
-        public static int minX;
-        public static int maxX;
-        public static int minY;
-        public static int maxY;
+        public int minX;
+        public int maxX;
+        public int minY;
+        public int maxY;
 
-        public static event EventHandler<MessageEventArgs> OnMessage;
+        
 
-        public static Item ItemByID(int id)
+        public event EventHandler<MessageEventArgs> OnMessage;
+
+        public Item ItemByID(int id)
         {
             return _items.SingleOrDefault(x => x.ID == id);
         }
 
-        public static List<Item> ListItems()
+        public List<Item> ListItems()
         {
             return _items;
         }
 
-        public static void AddItem(string Name, string NamePlural, int Price)
+        public void AddItem(string Name, string NamePlural, int Price)
         {
             _items.Add(new Item(_items.Count, Name,NamePlural, Price));
         }
 
-        public static Monster MonsterByID(int id)
+        public Monster MonsterByID(int id)
         {
             return _monsters.SingleOrDefault(x => x.ID == id);
         }
 
-        public static List<Monster> ListMonsters()
+        public List<Monster> ListMonsters()
         {
             return _monsters;
         }
 
-        public static Quest QuestByID(int id)
+        public Quest QuestByID(int id)
         {
             return _quests.SingleOrDefault(x => x.ID == id);
         }
 
-        public static List<Quest> ListQuests()
+        public List<Quest> ListQuests()
         {
             return _quests;
         }
 
-        public static Location LocationByID(int id)
+        public Location LocationByID(int id)
         {
             return _locations.SingleOrDefault(x => x.ID == id);
         }
 
-        public static List<Location> ListLocations()
+        public List<Location> ListLocations()
         {
             return _locations;
         }
 
-        public static Vendor VendorByID(int id)
+        public Vendor VendorByID(int id)
         {
             return _vendors.SingleOrDefault(x => x.ID == id);
         }
 
-        public static List<Vendor> ListVendors()
+        public List<Vendor> ListVendors()
         {
             return _vendors;
         }
 
-        public static bool LoadWorld(string xmlWorld)
+        public World(string xmlWorld)
+        {
+            this._xmlWorld = xmlWorld;
+        }
+
+        public bool LoadWorld()
         {
             string pasos = string.Empty;
             try
@@ -96,7 +101,7 @@ namespace Engine
                 XmlDocument worldData = new XmlDocument();
 
                 pasos = "Cargando el XML";
-                worldData.LoadXml(xmlWorld);
+                worldData.LoadXml(this._xmlWorld);
 
                 pasos = "Cargando los Elementos";
                 RaiseMessage(MessageTypes.LoadingItems);
@@ -319,8 +324,79 @@ namespace Engine
                 return false;
             }
         }
-        
-        public static void CalculateXYLocations()
+
+        public string ToXmlString()
+        {
+            XmlDocument playerData = new XmlDocument();
+
+            // Create the top-level XML node
+            XmlNode player = playerData.CreateElement("Player");
+            playerData.AppendChild(player);
+
+            // Create the "Stats" child node to hold the other player statistics nodes
+            XmlNode stats = playerData.CreateElement("Stats");
+            player.AppendChild(stats);
+
+            // Create the child nodes for the "Stats" node
+            //CreateNewChildXmlNode(playerData, stats, "CurrentHitPoints", CurrentHitPoints);
+            //CreateNewChildXmlNode(playerData, stats, "MaximumHitPoints", MaximumHitPoints);
+            //CreateNewChildXmlNode(playerData, stats, "Gold", Gold);
+            //CreateNewChildXmlNode(playerData, stats, "ExperiencePoints", ExperiencePoints);
+            //CreateNewChildXmlNode(playerData, stats, "CurrentLocation", CurrentLocation.ID);
+
+            //if (CurrentWeapon != null)
+            //{
+            //    CreateNewChildXmlNode(playerData, stats, "CurrentWeapon", CurrentWeapon.ID);
+            //}
+
+            // Create the "InventoryItems" child node to hold each InventoryItem node
+            XmlNode inventoryItems = playerData.CreateElement("InventoryItems");
+            player.AppendChild(inventoryItems);
+
+            // Create an "InventoryItem" node for each item in the player's inventory
+            //foreach (InventoryItem item in Inventory)
+            //{
+            //    XmlNode inventoryItem = playerData.CreateElement("InventoryItem");
+
+            //    AddXmlAttributeToNode(playerData, inventoryItem, "ID", item.Details.ID);
+            //    AddXmlAttributeToNode(playerData, inventoryItem, "Quantity", item.Quantity);
+
+            //    inventoryItems.AppendChild(inventoryItem);
+            //}
+
+            // Create the "PlayerQuests" child node to hold each PlayerQuest node
+            XmlNode playerQuests = playerData.CreateElement("PlayerQuests");
+            player.AppendChild(playerQuests);
+
+            // Create a "PlayerQuest" node for each quest the player has acquired
+            //foreach (PlayerQuest quest in Quests)
+            //{
+            //    XmlNode playerQuest = playerData.CreateElement("PlayerQuest");
+
+            //    AddXmlAttributeToNode(playerData, playerQuest, "ID", quest.Details.ID);
+            //    AddXmlAttributeToNode(playerData, playerQuest, "IsCompleted", quest.IsCompleted);
+
+            //    playerQuests.AppendChild(playerQuest);
+            //}
+
+            return playerData.InnerXml; // The XML document, as a string, so we can save the data to disk
+        }
+
+        private void CreateNewChildXmlNode(XmlDocument document, XmlNode parentNode, string elementName, object value)
+        {
+            XmlNode node = document.CreateElement(elementName);
+            node.AppendChild(document.CreateTextNode(value.ToString()));
+            parentNode.AppendChild(node);
+        }
+
+        private void AddXmlAttributeToNode(XmlDocument document, XmlNode node, string attributeName, object value)
+        {
+            XmlAttribute attribute = document.CreateAttribute(attributeName);
+            attribute.Value = value.ToString();
+            node.Attributes.Append(attribute);
+        }
+
+        public void CalculateXYLocations()
         {
             Location loc = place[place.Count - 1];
 
@@ -365,7 +441,7 @@ namespace Engine
             }
         }
 
-        public static void CalculateMinMaxXY()
+        public void CalculateMinMaxXY()
         {
             minX = _locations.Count;
             maxX = _locations.Count;
@@ -388,9 +464,9 @@ namespace Engine
             });
         }
 
-        public static List<Location> GetPlace()
+        public List<Location> GetPlace()
         {
-            Location home = LocationByID(LOCATION_ID_HOME);
+            Location home = LocationByID(Game.LOCATION_ID_HOME);
 
             place = new List<Location>();
 
@@ -406,9 +482,9 @@ namespace Engine
             return place;
         }
 
-        public static DataTable GetDataTablePlace()
+        public DataTable GetDataTablePlace()
         {
-            Location home = LocationByID(LOCATION_ID_HOME);
+            Location home = LocationByID(Game.LOCATION_ID_HOME);
 
             place = new List<Location>();
 
@@ -435,10 +511,10 @@ namespace Engine
 
                 for (int col = minX; col <= maxX; col++)
                 {
-                    if (World.place.Find(l => l.x == col && l.y == row) != null)
+                    if (place.Find(l => l.x == col && l.y == row) != null)
                     {
 
-                        Location loc = World.place.Find(l => l.x == col && l.y == row);
+                        Location loc = place.Find(l => l.x == col && l.y == row);
 
                         dataRow["loc" + (col - minX).ToString()] = Environment.NewLine + loc.Name + Environment.NewLine;
                     }
@@ -456,7 +532,7 @@ namespace Engine
             return dataTablePlace;
         }
 
-        private static void RaiseMessage(MessageTypes MessageType)
+        private void RaiseMessage(MessageTypes MessageType)
         {
             if (OnMessage != null)
             {

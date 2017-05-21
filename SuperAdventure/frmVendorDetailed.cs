@@ -31,7 +31,7 @@ namespace SuperAdventure
 
             this.Text = "Vendor : " + this.VendorId;
 
-            Vendor vendor = World.VendorByID(this.VendorId);
+            Vendor vendor = Game.Instance.world.VendorByID(this.VendorId);
 
             txtName.Text = vendor.Name;
 
@@ -45,7 +45,7 @@ namespace SuperAdventure
 
         private void lbInventoryItem_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Vendor vendor = World.VendorByID(this.VendorId);
+            Vendor vendor = Game.Instance.world.VendorByID(this.VendorId);
 
             if (lbInventoryItem.Items.Count > 0)
             {

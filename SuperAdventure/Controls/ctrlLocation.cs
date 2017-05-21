@@ -26,7 +26,7 @@ namespace SuperAdventure.Controls
             InitializeComponent();
 
             this.LocationName.Text = Text;
-            this.location = World.LocationByID(IdLocation);
+            this.location = Game.Instance.world.LocationByID(IdLocation);
         }
 
         public ctrlLocation(int IdLocation, string Text, string B64Image)
@@ -40,7 +40,7 @@ namespace SuperAdventure.Controls
                 Image image = Image.FromStream(ms);
                 //bitmap = new Bitmap(ms);
                 this.LocationName.Text = Text;
-                this.location = World.LocationByID(IdLocation);
+                this.location = Game.Instance.world.LocationByID(IdLocation);
                 //this.Picture.Image = gifImage.GetNextFrame();
                 this.Picture.Image = image;
             }

@@ -18,7 +18,7 @@ namespace SuperAdventure
         {
             InitializeComponent();
 
-            lbItems.DataSource = World.ListItems();
+            lbItems.DataSource = Game.Instance.world.ListItems();
             lbItems.DisplayMember = "Name";
             lbItems.ValueMember = "ID";
 

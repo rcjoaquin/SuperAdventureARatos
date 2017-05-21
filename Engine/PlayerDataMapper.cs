@@ -73,7 +73,7 @@ namespace Engine
                                 bool isCompleted = (bool)reader["IsCompleted"];
 
                                 // Build the PlayerQuest item, for this row
-                                PlayerQuest playerQuest = new PlayerQuest(World.QuestByID(questID));
+                                PlayerQuest playerQuest = new PlayerQuest(Game.Instance.world.QuestByID(questID));
                                 playerQuest.IsCompleted = isCompleted;
 
                                 // Add the PlayerQuest to the player's property
@@ -98,7 +98,7 @@ namespace Engine
                                 int quantity = (int)reader["Quantity"];
 
                                 // Add the item to the player's inventory
-                                player.AddItemToInventory(World.ItemByID(inventoryItemID), quantity);
+                                player.AddItemToInventory(Game.Instance.world.ItemByID(inventoryItemID), quantity);
                             }
                         }
                     }

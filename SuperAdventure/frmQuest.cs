@@ -16,7 +16,7 @@ namespace SuperAdventure
         public frmQuest()
         {
             InitializeComponent();
-            lbQuests.DataSource = World.ListQuests();
+            lbQuests.DataSource = Game.Instance.world.ListQuests();
             lbQuests.DisplayMember = "Name";
             lbQuests.ValueMember = "ID";
 

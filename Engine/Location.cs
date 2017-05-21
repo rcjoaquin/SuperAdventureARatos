@@ -85,12 +85,12 @@ namespace Engine
 
                 if(randomNumber <= runningTotal)
                 {
-                    return World.MonsterByID(monsterKeyValuePair.Key).NewInstanceOfMonster();
+                    return Game.Instance.world.MonsterByID(monsterKeyValuePair.Key).NewInstanceOfMonster();
                 }
             }
 
             // In case there was a problem, return the last monster in the list.
-            return World.MonsterByID(_monstersAtLocation.Keys.Last()).NewInstanceOfMonster();
+            return Game.Instance.world.MonsterByID(_monstersAtLocation.Keys.Last()).NewInstanceOfMonster();
         }
     }
 }

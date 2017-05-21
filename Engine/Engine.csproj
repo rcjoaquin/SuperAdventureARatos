@@ -42,6 +42,7 @@
     <Compile Include="Characters\Character.cs" />
     <Compile Include="Characters\Magician.cs" />
     <Compile Include="Characters\Smith.cs" />
+    <Compile Include="Game.cs" />
     <Compile Include="Messages\MessageEventArgs.cs" />
     <Compile Include="Items\HealingPotion.cs" />
     <Compile Include="Items\InventoryItem.cs" />

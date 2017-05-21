@@ -30,7 +30,7 @@ namespace SuperAdventure
 
             this.Text = "Quest Id : " + this.QuestId.ToString();
 
-            Quest quest = World.QuestByID(this.QuestId);
+            Quest quest = Game.Instance.world.QuestByID(this.QuestId);
 
             txtName.Text = quest.Name;
 
@@ -52,7 +52,7 @@ namespace SuperAdventure
 
         private void lbQuestCompletionItems_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Quest quest = World.QuestByID(this.QuestId);
+            Quest quest = Game.Instance.world.QuestByID(this.QuestId);
 
             if (lbQuestCompletionItems.Items.Count > 0)
             {

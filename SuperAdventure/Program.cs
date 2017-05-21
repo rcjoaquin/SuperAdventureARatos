@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
+using Engine;
 
 namespace SuperAdventure
 {
@@ -13,11 +14,18 @@ namespace SuperAdventure
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frmLoadingPlayer());
+
+            while(Game.NewWorld)
+            {
+                Application.Run(new frmLoadingPlayer());
+
+                Application.Run(new frmWorld());
+            }
+
 
             //Application.Run(new SuperAdventure());
 
-            Application.Run(new frmWorld());
+
         }
     }
 }

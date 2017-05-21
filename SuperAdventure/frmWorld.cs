@@ -16,21 +16,21 @@ namespace SuperAdventure
         {
             InitializeComponent();
 
-            List<Location> place = World.GetPlace();
+            List<Location> place = Game.Instance.world.GetPlace();
 
-            tblpWorld.ColumnCount = World.maxX - World.minX +1;
-            tblpWorld.RowCount = World.maxY - World.minY +1;
+            tblpWorld.ColumnCount = Game.Instance.world.maxX - Game.Instance.world.minX +1;
+            tblpWorld.RowCount = Game.Instance.world.maxY - Game.Instance.world.minY +1;
 
-            for (int row = World.minY; row <= World.maxY; row++)
+            for (int row = Game.Instance.world.minY; row <= Game.Instance.world.maxY; row++)
             {
-                for (int col = World.minX; col <= World.maxX; col++)
+                for (int col = Game.Instance.world.minX; col <= Game.Instance.world.maxX; col++)
                 {
                     if (place.Find(l => l.x == col && l.y == row) != null)
                     {
 
                         Location loc = place.Find(l => l.x == col && l.y == row);
 
-                        tblpWorld.Controls.Add((string.IsNullOrEmpty(loc.Picture)) ? new ctrlLocation(loc.ID, loc.Name) : new ctrlLocation(loc.ID, loc.Name, loc.Picture), col - World.minX, row - World.minY);
+                        tblpWorld.Controls.Add((string.IsNullOrEmpty(loc.Picture)) ? new ctrlLocation(loc.ID, loc.Name) : new ctrlLocation(loc.ID, loc.Name, loc.Picture), col - Game.Instance.world.minX, row - Game.Instance.world.minY);
 
                     }
 
@@ -40,6 +40,12 @@ namespace SuperAdventure
 
             tblpWorld.AutoSize = true;
             
+        }
+
+        private void worldsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Game.NewWorld = true;
+            this.Close();
         }
 
         private void itemsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -64,6 +70,12 @@ namespace SuperAdventure
         {
             frmVendor fVendor = new frmVendor();
             fVendor.ShowDialog();
+        }
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Game.NewWorld = false;
+            this.Close();
         }
     }
 }
