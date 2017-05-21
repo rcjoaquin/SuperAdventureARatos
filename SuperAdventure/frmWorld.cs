@@ -77,5 +77,22 @@ namespace SuperAdventure
             Game.NewWorld = false;
             this.Close();
         }
+
+        private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog sfd = new SaveFileDialog();
+            sfd.Filter = "Xml World File (.xml)|*.xml|All Files (*.*)|*.*";
+            //sfd.Filter = "Bitmap Image (.bmp)|*.bmp|
+            //              Gif Image (.gif)|*.gif|
+            //              JPEG Image (.jpeg)|*.jpeg|
+            //              Png Image (.png)|*.png|
+            //              Tiff Image (.tiff)|*.tiff|
+            //              Wmf Image (.wmf)|*.wmf";
+            sfd.ShowDialog();
+            if(!string.IsNullOrEmpty(sfd.FileName))
+            {
+                File.WriteAllText(sfd.FileName, Game.Instance.world.ToXmlString());
+            }
+        }
     }
 }

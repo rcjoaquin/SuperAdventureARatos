@@ -94,16 +94,12 @@ namespace Engine
 
         public bool LoadWorld()
         {
-            string pasos = string.Empty;
             try
             {
-                pasos = "Inicializando";
                 XmlDocument worldData = new XmlDocument();
 
-                pasos = "Cargando el XML";
                 worldData.LoadXml(this._xmlWorld);
 
-                pasos = "Cargando los Elementos";
                 RaiseMessage(MessageTypes.LoadingItems);
                 #region Populate Items
                 _items = new List<Item>();
@@ -117,8 +113,6 @@ namespace Engine
                     _items.Add(new Item(Id, Name, NamePlural, Price));
                 }
                 #endregion
-
-                pasos = "Cargando las Armas";
 
                 #region Populate Weapons
                 foreach (XmlNode node in worldData.SelectNodes("/World/items/weapon"))
@@ -134,7 +128,6 @@ namespace Engine
                 }
                 #endregion
 
-                pasos = "Cargando las Pociones";
                 #region Populate Healing Potions
                 foreach (XmlNode node in worldData.SelectNodes("/World/items/healingPotion"))
                 {
@@ -148,7 +141,6 @@ namespace Engine
                 }
                 #endregion
 
-                pasos = "Cargando los Monstruos";
                 RaiseMessage(MessageTypes.LoadingMonsters);
                 #region Populate Monsters
                 _monsters = new List<Monster>();
@@ -178,7 +170,6 @@ namespace Engine
                 }
                 #endregion
 
-                pasos = "Cargando las Quests";
                 RaiseMessage(MessageTypes.LoadingQuests);
                 #region Populate Quests
                 _quests = new List<Quest>();
@@ -211,7 +202,6 @@ namespace Engine
                 }
                 #endregion
 
-                pasos = "Cargando los Vendedores";
                 RaiseMessage(MessageTypes.LoadingVendors);
                 #region Populate Vendors
                 _vendors = new List<Vendor>();
@@ -235,7 +225,6 @@ namespace Engine
                 }
                 #endregion
 
-                pasos = "Cargando las localizaciones";
                 RaiseMessage(MessageTypes.LoadingLocations);
                 #region Populate Locations
                 _locations = new List<Location>();
@@ -285,7 +274,6 @@ namespace Engine
                 }
                 #endregion
 
-                pasos = "Cargando la vecindad";
                 #region Populate Neighborhood
                 foreach (XmlNode node in worldData.SelectNodes("/World/Neighborhood/Neighbor"))
                 {
@@ -327,59 +315,249 @@ namespace Engine
 
         public string ToXmlString()
         {
-            XmlDocument playerData = new XmlDocument();
+            XmlDocument worldData = new XmlDocument();
 
             // Create the top-level XML node
-            XmlNode player = playerData.CreateElement("Player");
-            playerData.AppendChild(player);
+            XmlNode nodeWorld = worldData.CreateElement("World");
+            worldData.AppendChild(nodeWorld);
 
-            // Create the "Stats" child node to hold the other player statistics nodes
-            XmlNode stats = playerData.CreateElement("Stats");
-            player.AppendChild(stats);
+            #region Create Node Items
 
-            // Create the child nodes for the "Stats" node
-            //CreateNewChildXmlNode(playerData, stats, "CurrentHitPoints", CurrentHitPoints);
-            //CreateNewChildXmlNode(playerData, stats, "MaximumHitPoints", MaximumHitPoints);
-            //CreateNewChildXmlNode(playerData, stats, "Gold", Gold);
-            //CreateNewChildXmlNode(playerData, stats, "ExperiencePoints", ExperiencePoints);
-            //CreateNewChildXmlNode(playerData, stats, "CurrentLocation", CurrentLocation.ID);
+            // Create the "items" child node
+            XmlNode nodeItems = worldData.CreateElement("items");
+            
+            foreach (Item item in _items)
+            {
+                XmlNode nodeItem;
+                if (item is Weapon)
+                {
+                    Weapon weapon = item as Weapon;
+                    nodeItem = worldData.CreateElement("weapon");
+                    CreateNewChildXmlNode(worldData, nodeItem, "MinimumDamage", weapon.MinimumDamage);
+                    CreateNewChildXmlNode(worldData, nodeItem, "MaximumDamage", weapon.MaximumDamage);
+                }
+                else if( item is HealingPotion)
+                {
+                    HealingPotion healingPotion = item as HealingPotion;
+                    nodeItem = worldData.CreateElement("healingPotion");
+                    CreateNewChildXmlNode(worldData, nodeItem, "AmountToHeal", healingPotion.AmountToHeal);
+                }
+                else
+                {
+                    nodeItem = worldData.CreateElement("item");
+                }
 
-            //if (CurrentWeapon != null)
-            //{
-            //    CreateNewChildXmlNode(playerData, stats, "CurrentWeapon", CurrentWeapon.ID);
-            //}
+                CreateNewChildXmlNode(worldData, nodeItem, "Id", item.ID);
+                CreateNewChildXmlNode(worldData, nodeItem, "Name", item.Name);
+                CreateNewChildXmlNode(worldData, nodeItem, "NamePlural", item.NamePlural);
+                CreateNewChildXmlNode(worldData, nodeItem, "Price", item.Price);
 
-            // Create the "InventoryItems" child node to hold each InventoryItem node
-            XmlNode inventoryItems = playerData.CreateElement("InventoryItems");
-            player.AppendChild(inventoryItems);
+                nodeItems.AppendChild(nodeItem);
+            }
 
-            // Create an "InventoryItem" node for each item in the player's inventory
-            //foreach (InventoryItem item in Inventory)
-            //{
-            //    XmlNode inventoryItem = playerData.CreateElement("InventoryItem");
+            nodeWorld.AppendChild(nodeItems);
 
-            //    AddXmlAttributeToNode(playerData, inventoryItem, "ID", item.Details.ID);
-            //    AddXmlAttributeToNode(playerData, inventoryItem, "Quantity", item.Quantity);
+            #endregion
 
-            //    inventoryItems.AppendChild(inventoryItem);
-            //}
+            #region Create Node Monsters
 
-            // Create the "PlayerQuests" child node to hold each PlayerQuest node
-            XmlNode playerQuests = playerData.CreateElement("PlayerQuests");
-            player.AppendChild(playerQuests);
+            // Create the "Monsters" child node
+            XmlNode nodeMonsters = worldData.CreateElement("Monsters");
+            
+            foreach(Monster monster in _monsters)
+            {
+                XmlNode nodeMonster = worldData.CreateElement("Monster");
 
-            // Create a "PlayerQuest" node for each quest the player has acquired
-            //foreach (PlayerQuest quest in Quests)
-            //{
-            //    XmlNode playerQuest = playerData.CreateElement("PlayerQuest");
+                CreateNewChildXmlNode(worldData, nodeMonster, "Id", monster.ID);
+                CreateNewChildXmlNode(worldData, nodeMonster, "Name", monster.Name);
+                CreateNewChildXmlNode(worldData, nodeMonster, "MaximumDamage", monster.MaximumDamage);
+                CreateNewChildXmlNode(worldData, nodeMonster, "RewardExperiencePoints", monster.RewardExperiencePoints);
+                CreateNewChildXmlNode(worldData, nodeMonster, "RewardGold", monster.RewardGold);
+                CreateNewChildXmlNode(worldData, nodeMonster, "CurrentHitPoints", monster.CurrentHitPoints);
+                CreateNewChildXmlNode(worldData, nodeMonster, "MaximumHitPoints", monster.MaximumHitPoints);
 
-            //    AddXmlAttributeToNode(playerData, playerQuest, "ID", quest.Details.ID);
-            //    AddXmlAttributeToNode(playerData, playerQuest, "IsCompleted", quest.IsCompleted);
+                if(monster.LootTable.Count >0 )
+                {
+                    XmlNode nodeLootTable = worldData.CreateElement("LootTable");
 
-            //    playerQuests.AppendChild(playerQuest);
-            //}
+                    foreach(LootItem lootItem in monster.LootTable)
+                    {
+                        CreateNewChildXmlNode(worldData, nodeLootTable, "IdItem", lootItem.Details.ID);
+                        CreateNewChildXmlNode(worldData, nodeLootTable, "DropPercentage", lootItem.DropPercentage);
+                        CreateNewChildXmlNode(worldData, nodeLootTable, "IsDefaultItem", lootItem.IsDefaultItem);
+                    }
 
-            return playerData.InnerXml; // The XML document, as a string, so we can save the data to disk
+                    nodeMonster.AppendChild(nodeLootTable);
+                }
+
+                nodeMonsters.AppendChild(nodeMonster);
+            }
+
+            nodeWorld.AppendChild(nodeMonsters);
+
+            #endregion
+
+            #region Create Node Quests
+
+            XmlNode nodeQuests = worldData.CreateElement("Quests");
+            
+            foreach (Quest quest in _quests)
+            {
+                XmlNode nodeQuest = worldData.CreateElement("Quest");
+
+                CreateNewChildXmlNode(worldData, nodeQuest, "Id", quest.ID);
+                CreateNewChildXmlNode(worldData, nodeQuest, "Name", quest.Name);
+                CreateNewChildXmlNode(worldData, nodeQuest, "Description", quest.Description);
+                CreateNewChildXmlNode(worldData, nodeQuest, "RewardExperiencePoints", quest.RewardExperiencePoints);
+                CreateNewChildXmlNode(worldData, nodeQuest, "RewardGold", quest.RewardGold);
+                
+                if(quest.QuestCompletionItems.Count>0)
+                {
+                    XmlNode nodeQuestCompletionItems = worldData.CreateElement("QuestCompletionItems");
+
+                    foreach (QuestCompletionItem questCompletionItem in quest.QuestCompletionItems)
+                    {
+                        XmlNode nodeQuestCompletionItem = worldData.CreateElement("QuestCompletionItem");
+
+                        CreateNewChildXmlNode(worldData, nodeQuest, "IdItem", questCompletionItem.Details.ID);
+                        CreateNewChildXmlNode(worldData, nodeQuest, "Quantity", questCompletionItem.Quantity);
+
+                        nodeQuestCompletionItems.AppendChild(nodeQuestCompletionItem);
+                    }
+
+                    nodeQuest.AppendChild(nodeQuestCompletionItems);
+                }
+
+                nodeQuests.AppendChild(nodeQuest);
+            }
+
+            nodeWorld.AppendChild(nodeQuests);
+
+            #endregion
+
+            #region Create Node Vendors
+
+            XmlNode nodeVendors = worldData.CreateElement("Vendors");
+            
+            foreach(Vendor vendor in _vendors)
+            {
+                XmlNode nodeVendor = worldData.CreateElement("Vendor");
+
+                CreateNewChildXmlNode(worldData, nodeVendor, "Id", vendor.ID);
+                CreateNewChildXmlNode(worldData, nodeVendor, "Name", vendor.Name);
+
+                if(vendor.Inventory.Count > 0)
+                {
+                    foreach(InventoryItem inventoryItem in vendor.Inventory)
+                    {
+                        XmlNode nodeInventoryItem = worldData.CreateElement("Vendor");
+                        
+                        CreateNewChildXmlNode(worldData, nodeVendor, "IdItem", inventoryItem.Details.ID);
+                        CreateNewChildXmlNode(worldData, nodeVendor, "Quantity", inventoryItem.Quantity);
+
+                        nodeVendor.AppendChild(nodeInventoryItem);
+                    }
+                }
+                
+            }
+
+            nodeWorld.AppendChild(nodeVendors);
+
+
+            #endregion
+
+            #region Create Node Locations
+
+            XmlNode nodeLocations = worldData.CreateElement("Locations");
+            
+            foreach(Location location in _locations)
+            {
+                XmlNode nodeLocation = worldData.CreateElement("Location");
+
+                CreateNewChildXmlNode(worldData, nodeLocation, "Id", location.ID);
+                CreateNewChildXmlNode(worldData, nodeLocation, "Name", location.Name);
+                CreateNewChildXmlNode(worldData, nodeLocation, "Description", location.Description);
+
+                if (!string.IsNullOrEmpty(location.Picture))
+                {
+                    CreateNewChildXmlNode(worldData, nodeLocation, "Picture", location.Picture);                    
+                }
+
+                if (location.ItemRequiredToEnter!=null)
+                {
+                    CreateNewChildXmlNode(worldData, nodeLocation, "ItemRequiredToEnter", location.ItemRequiredToEnter);
+                }
+
+                if (location.QuestAvailableHere!= null)
+                {
+                    CreateNewChildXmlNode(worldData, nodeLocation, "QuestAvailableHere", location.QuestAvailableHere);                    
+                }
+
+                if (location.VendorWorkingHere!= null)
+                {
+                    CreateNewChildXmlNode(worldData, nodeLocation, "VendorWorkingHere", location.VendorWorkingHere);
+                }
+
+                if (location.Monsters.Count > 0)
+                {
+                    XmlNode nodeMonstersAtLocation = worldData.CreateElement("Monsters");
+
+                    foreach(KeyValuePair<int,int> mosterAtLocation in location.Monsters)
+                    {
+                        XmlNode nodeMonsterAtLocation = worldData.CreateElement("Monster");
+
+                        CreateNewChildXmlNode(worldData, nodeMonsterAtLocation, "IdMonster", mosterAtLocation.Key);
+                        CreateNewChildXmlNode(worldData, nodeMonsterAtLocation, "PercentageOfAppearance", mosterAtLocation.Value);
+
+                        nodeLocation.AppendChild(nodeMonsterAtLocation);
+                    }
+                    
+                    nodeLocation.AppendChild(nodeMonstersAtLocation);
+                }
+
+                nodeLocations.AppendChild(nodeLocation);
+            }
+
+            nodeWorld.AppendChild(nodeLocations);
+
+            #endregion
+
+            #region Create Node Neighborhood
+
+            XmlNode nodeNeighborhood = worldData.CreateElement("Neighborhood");
+
+            foreach(Location location in _locations)
+            {
+                XmlNode nodeNeighbor = worldData.CreateElement("Neighbor");
+
+                if (location.LocationToNorth != null)
+                {
+                    CreateNewChildXmlNode(worldData, nodeNeighbor, "North", location.LocationToNorth.ID);
+                }
+
+                if (location.LocationToSouth != null)
+                {
+                    CreateNewChildXmlNode(worldData, nodeNeighbor, "South", location.LocationToSouth.ID);
+                }
+
+                if (location.LocationToEast != null)
+                {
+                    CreateNewChildXmlNode(worldData, nodeNeighbor, "East", location.LocationToEast.ID);
+                }
+
+                if (location.LocationToWest != null)
+                {
+                    CreateNewChildXmlNode(worldData, nodeNeighbor, "West", location.LocationToWest.ID);
+                }
+
+                nodeNeighborhood.AppendChild(nodeNeighbor);
+            }
+
+            nodeWorld.AppendChild(nodeNeighborhood);
+            
+            #endregion
+
+            return worldData.InnerXml; // The XML document, as a string, so we can save the data to disk
         }
 
         private void CreateNewChildXmlNode(XmlDocument document, XmlNode parentNode, string elementName, object value)

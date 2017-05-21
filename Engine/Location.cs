@@ -48,6 +48,14 @@ namespace Engine
             QuestAvailableHere = questAvailableHere;
         }
 
+        public SortedList<int, int> Monsters
+        {
+            get
+            {
+                return _monstersAtLocation;
+            }
+        }
+
         public void AddMonster(int monsterID, int percentageOfAppearance)
         {
             if(_monstersAtLocation.ContainsKey(monsterID))
