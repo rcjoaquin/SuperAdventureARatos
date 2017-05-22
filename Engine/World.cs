@@ -92,6 +92,40 @@ namespace Engine
             this._xmlWorld = xmlWorld;
         }
 
+        public World(int cols, int rows)
+        {
+            int numLocations = cols * rows;
+            _items = new List<Item>();
+            _quests = new List<Quest>();
+            _monsters = new List<Monster>();
+            _vendors = new List<Vendor>();
+            _locations = new List<Location>();
+
+            for (int i = 0; i < numLocations; i++)
+            {
+                _locations.Add( new Location(i,"Location "+i.ToString(),"Location "+i.ToString(),null,null));
+
+            }
+
+            for(int i = 0; i < cols; i++)
+            {
+                for(int j = 0; j < rows; j++)
+                {
+                    if(j!= 0)
+                        _locations[j + i * rows].LocationToNorth = _locations[j -1 + i * rows];
+
+                    if(j!= (rows- 1))
+                        _locations[j + i * rows].LocationToSouth = _locations[j +1 + i * rows];
+
+                    if(i!= 0)
+                        _locations[j + i * rows].LocationToEast = _locations[j + (i -1) * rows];
+
+                    if(i!= (cols- 1))
+                        _locations[j + i * rows].LocationToWest = _locations[j + (i +1) * rows];
+                }
+            }
+        }
+
         public bool LoadWorld()
         {
             try
@@ -590,6 +624,8 @@ namespace Engine
         {
             Location loc = place[place.Count - 1];
 
+            RaiseMessage(MessageTypes.LoadingLocationGrid,loc.Name);
+
             if (loc.LocationToNorth != null && !place.Exists(l => l.ID == loc.LocationToNorth.ID))
             {
                 Location newLocation = loc.LocationToNorth;
@@ -728,6 +764,15 @@ namespace Engine
             {
                 OnMessage(null, new MessageEventArgs(MessageType));
                 //OnMessage(this, new MessageEventArgs(MessageType, name));
+            }
+        }
+
+        private void RaiseMessage(MessageTypes MessageType, string name)
+        {
+            if (OnMessage != null)
+            {
+                
+                OnMessage(this, new MessageEventArgs(MessageType, name));
             }
         }
     }

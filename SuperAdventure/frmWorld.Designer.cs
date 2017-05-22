@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.worldsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.itemsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -35,10 +36,13 @@
             this.questsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.charactersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.vendorsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tblpWorld = new System.Windows.Forms.TableLayoutPanel();
-            this.saveAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ctxMenuTablePanel = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.addRightColumnToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
+            this.ctxMenuTablePanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -96,9 +100,16 @@
             // vendorsToolStripMenuItem
             // 
             this.vendorsToolStripMenuItem.Name = "vendorsToolStripMenuItem";
-            this.vendorsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.vendorsToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
             this.vendorsToolStripMenuItem.Text = "Vendors";
             this.vendorsToolStripMenuItem.Click += new System.EventHandler(this.vendorsToolStripMenuItem_Click);
+            // 
+            // saveAsToolStripMenuItem
+            // 
+            this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
+            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(59, 20);
+            this.saveAsToolStripMenuItem.Text = "Save As";
+            this.saveAsToolStripMenuItem.Click += new System.EventHandler(this.saveAsToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
@@ -122,12 +133,19 @@
             this.tblpWorld.Size = new System.Drawing.Size(200, 100);
             this.tblpWorld.TabIndex = 2;
             // 
-            // saveAsToolStripMenuItem
+            // ctxMenuTablePanel
             // 
-            this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
-            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(59, 20);
-            this.saveAsToolStripMenuItem.Text = "Save As";
-            this.saveAsToolStripMenuItem.Click += new System.EventHandler(this.saveAsToolStripMenuItem_Click);
+            this.ctxMenuTablePanel.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.addRightColumnToolStripMenuItem});
+            this.ctxMenuTablePanel.Name = "ctxMenuTablePanel";
+            this.ctxMenuTablePanel.Size = new System.Drawing.Size(174, 48);
+            // 
+            // addRightColumnToolStripMenuItem
+            // 
+            this.addRightColumnToolStripMenuItem.Name = "addRightColumnToolStripMenuItem";
+            this.addRightColumnToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
+            this.addRightColumnToolStripMenuItem.Text = "Add Right Column";
+            this.addRightColumnToolStripMenuItem.Click += new System.EventHandler(this.addRightColumnToolStripMenuItem_Click);
             // 
             // frmWorld
             // 
@@ -142,6 +160,7 @@
             this.Text = "World";
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.ctxMenuTablePanel.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -159,5 +178,7 @@
         private System.Windows.Forms.ToolStripMenuItem worldsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem saveAsToolStripMenuItem;
+        private System.Windows.Forms.ContextMenuStrip ctxMenuTablePanel;
+        private System.Windows.Forms.ToolStripMenuItem addRightColumnToolStripMenuItem;
     }
 }

@@ -18,22 +18,39 @@ namespace SuperAdventure
 
             List<Location> place = Game.Instance.world.GetPlace();
 
-            tblpWorld.ColumnCount = Game.Instance.world.maxX - Game.Instance.world.minX +1;
-            tblpWorld.RowCount = Game.Instance.world.maxY - Game.Instance.world.minY +1;
+            tblpWorld.ColumnCount = Game.Instance.world.maxX - Game.Instance.world.minX +3;
+            tblpWorld.RowCount = Game.Instance.world.maxY - Game.Instance.world.minY +2;
+
+           
+
+            for (int col = Game.Instance.world.minX; col <= Game.Instance.world.maxX; col++)
+            {
+                tblpWorld.Controls.Add(new ctrlEmptyLocation(), col - Game.Instance.world.minX +1, 0);
+
+                tblpWorld.Controls.Add(new ctrlEmptyLocation(), col - Game.Instance.world.minX+1, Game.Instance.world.maxY - Game.Instance.world.minY + 2);
+            }
 
             for (int row = Game.Instance.world.minY; row <= Game.Instance.world.maxY; row++)
             {
+
+                tblpWorld.Controls.Add(new ctrlEmptyLocation(), 0, row - Game.Instance.world.minY + 1);
+
+                tblpWorld.Controls.Add(new ctrlEmptyLocation(), Game.Instance.world.maxX - Game.Instance.world.minX + 2, row - Game.Instance.world.minY + 1);
+
                 for (int col = Game.Instance.world.minX; col <= Game.Instance.world.maxX; col++)
                 {
+
                     if (place.Find(l => l.x == col && l.y == row) != null)
                     {
 
                         Location loc = place.Find(l => l.x == col && l.y == row);
 
-                        tblpWorld.Controls.Add((string.IsNullOrEmpty(loc.Picture)) ? new ctrlLocation(loc.ID, loc.Name) : new ctrlLocation(loc.ID, loc.Name, loc.Picture), col - Game.Instance.world.minX, row - Game.Instance.world.minY);
-
+                        tblpWorld.Controls.Add((string.IsNullOrEmpty(loc.Picture)) ? new ctrlLocation(loc.ID, loc.Name) : new ctrlLocation(loc.ID, loc.Name, loc.Picture), col - Game.Instance.world.minX +1 , row - Game.Instance.world.minY +1 );
                     }
-
+                    else
+                    {
+                        tblpWorld.Controls.Add(new ctrlEmptyLocation(), col - Game.Instance.world.minX +1, row - Game.Instance.world.minY +1 );
+                    }
                 }
 
             }
@@ -82,17 +99,16 @@ namespace SuperAdventure
         {
             SaveFileDialog sfd = new SaveFileDialog();
             sfd.Filter = "Xml World File (.xml)|*.xml|All Files (*.*)|*.*";
-            //sfd.Filter = "Bitmap Image (.bmp)|*.bmp|
-            //              Gif Image (.gif)|*.gif|
-            //              JPEG Image (.jpeg)|*.jpeg|
-            //              Png Image (.png)|*.png|
-            //              Tiff Image (.tiff)|*.tiff|
-            //              Wmf Image (.wmf)|*.wmf";
             sfd.ShowDialog();
             if(!string.IsNullOrEmpty(sfd.FileName))
             {
                 File.WriteAllText(sfd.FileName, Game.Instance.world.ToXmlString());
             }
+        }
+
+        private void addRightColumnToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //tblpWorld.
         }
     }
 }

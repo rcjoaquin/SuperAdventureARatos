@@ -17,9 +17,17 @@ namespace SuperAdventure
 
             while(Game.NewWorld)
             {
-                Application.Run(new frmLoadingPlayer());
+                frmLoadingPlayer fLoadingPlayer = new frmLoadingPlayer();
 
-                Application.Run(new frmWorld());
+                Application.Run(fLoadingPlayer);
+                if (fLoadingPlayer.WorldLoaded)
+                {
+                    Application.Run(new frmWorld());
+                }
+                else
+                {
+                    Game.NewWorld = false;
+                }
             }
 
 

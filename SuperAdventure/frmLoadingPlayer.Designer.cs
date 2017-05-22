@@ -62,6 +62,7 @@
             this.ShowInTaskbar = false;
             this.Text = "frmLoadingPlayer";
             this.Load += new System.EventHandler(this.frmLoadingPlayer_Load);
+            this.Shown += new System.EventHandler(this.frmLoadingPlayer_Shown);
             this.ResumeLayout(false);
             this.PerformLayout();
 

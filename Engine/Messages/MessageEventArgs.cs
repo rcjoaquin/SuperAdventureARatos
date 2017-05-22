@@ -12,6 +12,8 @@ namespace Engine.Messages
         LoadingVendors,
         LoadingLocations,
         
+        LoadingLocationGrid,
+        
         NeedAKey,
         MonsterDidDamageYou,
         MosterKilledYou
@@ -40,6 +42,12 @@ namespace Engine.Messages
             {
                 Message = "You must have a " + name + " to enter this location.";
                 AddExtraNewLine = true;
+            }
+
+            if (typeMessage.Equals(MessageTypes.LoadingLocationGrid))
+            {
+                Message = "Loading Location "+name;
+                Percentage = 85;
             }
 
             if (typeMessage.Equals(MessageTypes.MosterKilledYou))

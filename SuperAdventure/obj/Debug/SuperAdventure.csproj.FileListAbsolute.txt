@@ -79,3 +79,4 @@ C:\GitHub\SuperAdventureARatos\SuperAdventureARatos\SuperAdventure\obj\Debug\Sup
 C:\Users\Operador\Source\Repos\SuperAdventureARatos\SuperAdventure\bin\Debug\Worlds\World3x3.xml
 C:\Users\Operador\Source\Repos\SuperAdventureARatos\SuperAdventure\bin\Debug\Worlds\World2x2.xml
 C:\Users\Operador\Source\Repos\SuperAdventureARatos\SuperAdventure\obj\Debug\SuperAdventure.frmChooseWorld.resources
+C:\Users\Operador\Source\Repos\SuperAdventureARatos\SuperAdventure\obj\Debug\SuperAdventure.Controls.ctrlEmptyLocation.resources
