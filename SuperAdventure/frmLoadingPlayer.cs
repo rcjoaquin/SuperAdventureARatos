@@ -30,6 +30,11 @@ namespace SuperAdventure
             {
                 this.Close();
             }
+            else
+            {
+                MessageBox.Show("Ha ocurrido un error al cargar este mundo [" + WorldChoose + "]", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                this.Close();
+            }
 
         }
 
@@ -39,5 +44,6 @@ namespace SuperAdventure
 
             pbLoad.Value = messageEventArgs.Percentage;
         }
+
     }
 }

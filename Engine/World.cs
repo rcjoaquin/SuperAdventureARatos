@@ -419,13 +419,22 @@ namespace Engine
                     {
                         XmlNode nodeQuestCompletionItem = worldData.CreateElement("QuestCompletionItem");
 
-                        CreateNewChildXmlNode(worldData, nodeQuest, "IdItem", questCompletionItem.Details.ID);
-                        CreateNewChildXmlNode(worldData, nodeQuest, "Quantity", questCompletionItem.Quantity);
+                        CreateNewChildXmlNode(worldData, nodeQuestCompletionItem, "IdItem", questCompletionItem.Details.ID);
+                        CreateNewChildXmlNode(worldData, nodeQuestCompletionItem, "Quantity", questCompletionItem.Quantity);
 
                         nodeQuestCompletionItems.AppendChild(nodeQuestCompletionItem);
                     }
 
                     nodeQuest.AppendChild(nodeQuestCompletionItems);
+                }
+
+                if(quest.RewardItem!= null)
+                {
+                    XmlNode modeRewardItem = worldData.CreateElement("RewardItem");
+
+                    CreateNewChildXmlNode(worldData, modeRewardItem, "IdItem", quest.RewardItem.ID);
+
+                    nodeQuest.AppendChild(modeRewardItem);
                 }
 
                 nodeQuests.AppendChild(nodeQuest);
@@ -458,7 +467,8 @@ namespace Engine
                         nodeVendor.AppendChild(nodeInventoryItem);
                     }
                 }
-                
+
+                nodeVendors.AppendChild(nodeVendor);
             }
 
             nodeWorld.AppendChild(nodeVendors);
@@ -485,17 +495,17 @@ namespace Engine
 
                 if (location.ItemRequiredToEnter!=null)
                 {
-                    CreateNewChildXmlNode(worldData, nodeLocation, "ItemRequiredToEnter", location.ItemRequiredToEnter);
+                    CreateNewChildXmlNode(worldData, nodeLocation, "ItemRequiredToEnter", location.ItemRequiredToEnter.ID);
                 }
 
                 if (location.QuestAvailableHere!= null)
                 {
-                    CreateNewChildXmlNode(worldData, nodeLocation, "QuestAvailableHere", location.QuestAvailableHere);                    
+                    CreateNewChildXmlNode(worldData, nodeLocation, "QuestAvailableHere", location.QuestAvailableHere.ID);                    
                 }
 
                 if (location.VendorWorkingHere!= null)
                 {
-                    CreateNewChildXmlNode(worldData, nodeLocation, "VendorWorkingHere", location.VendorWorkingHere);
+                    CreateNewChildXmlNode(worldData, nodeLocation, "VendorWorkingHere", location.VendorWorkingHere.ID);
                 }
 
                 if (location.Monsters.Count > 0)
@@ -529,6 +539,8 @@ namespace Engine
             foreach(Location location in _locations)
             {
                 XmlNode nodeNeighbor = worldData.CreateElement("Neighbor");
+
+                CreateNewChildXmlNode(worldData, nodeNeighbor, "IdLocation", location.ID);
 
                 if (location.LocationToNorth != null)
                 {
